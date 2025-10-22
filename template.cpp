@@ -7,7 +7,6 @@ int INT_max = numeric_limits<int>::max();
 priority_queue<array<ll,2>, vector<array<ll,2>>, greater<array<ll,2>>> pq;
 int inf  = 1e9;
  
- 
 void solve(){
 	
 }

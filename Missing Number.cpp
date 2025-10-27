@@ -8,6 +8,16 @@ priority_queue<array<ll,2>, vector<array<ll,2>>, greater<array<ll,2>>> pq;
 int inf  = 1e9;
  
 void solve(){
+	ll n; cin>>n;
+	ll sum = 0;
+	for(int i =0; i<n-1;i++){
+		ll temp; 
+		cin>>temp;
+		sum+=temp;
+	} 
+	cout<<(n*(n+1)/2)-sum;
+	
+	
 
 	
 }

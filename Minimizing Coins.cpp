@@ -9,18 +9,23 @@ int inf  = 1e9;
  
 void solve(){
 	ll n,x; cin>>n>>x;
-	vector<ll> v(n),dp(x+1,0);
-	for(ll i = 0; i < n ; ++i) cin>>v[i];
+	vector<ll> v(n),dp(x+1,inf);
 	
-	dp[0] = 1;
-	for(int i = 1; i<=x;i++){
-		for(int coin : v){
-			if(coin>i) 
-				continue;
-			dp[i] = (dp[i-coin] + dp[i])%mod;
+	for(ll i = 0; i <n;i++) cin>>v[i];
+	
+	dp[0] = 0;
+	
+	for(ll i = 1;i<=x;i++){
+		for(ll coin:v){
+			if(coin>i) continue;
+			dp[i] = min(dp[i],dp[i-coin]+1);
 		}
 	}
-	cout<<dp[x]<<endl;
+	if(dp[x]!=inf)
+		cout<<dp[x];
+	else
+		cout<<-1;
+		
 
 	
 }

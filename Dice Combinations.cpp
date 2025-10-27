@@ -11,18 +11,13 @@ void solve(){
 	ll n;cin>>n;
 	vector<ll> v(n+1,0);
 	v[0] = 1;
-	
-	for(ll i = 1; i <=n;i++){
-		for(ll j = 1; j <=i;j++){
-			v[i] = (v[i] + v[i-j])%mod;
+	v[1] = 1;
+	for(int i = 2; i<=n;i++){
+		for(int j = 1;i-j>=0 && j<=6;j++){
+			v[i] = (v[i]+v[i-j])%mod;
 		}
-		
 	}
-	cout<<v[n]%mod;
-	
-
-
-	
+	cout<<v[n];	
 }
  
 int main(){

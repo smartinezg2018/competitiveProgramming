@@ -40,13 +40,21 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 }
 
 void solve(){
+	int y,x;
+	cin>>y>>x;
+	if(min(x,y)%2==0){
+		cout<<"Malvika"<<endl;
+		return;
+	}
+	cout<<"Akshat"<<endl;
+	
 	
 }
 
 int main(){
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
-	cout << setprecision(20)<< fixed;
+	// ios_base::sync_with_stdio(false);
+	// cin.tie(NULL); cout.tie(NULL);
+	// cout << setprecision(20)<< fixed;
 	// ll t; cin>>t; 
 	// while(t--)
 	solve();

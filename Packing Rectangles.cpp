@@ -11,9 +11,9 @@ void solve() {
     cin >> y >> x >> n;
 
     ll l = 0, r = 1; 
-    while(!func(r, y, x, n)){
+    while(!func(r, y, x, n))
     	r = r * 2;
-    }
+    
 
 
     while (l < r) {

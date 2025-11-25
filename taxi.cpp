@@ -40,6 +40,27 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 }
 
 void solve(){
+	int n; cin>>n;
+	vector<int> v(n);
+	map<int,int> m;
+	for(int i = 0; i <n;i++) {
+		cin>>v[i];
+		m[v[i]]++;
+	}
+	
+	int count = 0;
+	m[1]=max(0,m[1]-m[3]);
+	if(m[2]>0&&m[2]%2!=0){
+		m[1]=max(0,m[1]-2);
+	}
+	count+=m[4];
+	count+=m[3];
+	count+=(m[2]+1)/2;
+	count+=(m[1]+3)/4;
+	
+	cout<<count<<endl;
+	
+	
 	
 }
 

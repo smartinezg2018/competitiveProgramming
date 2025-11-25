@@ -22,7 +22,7 @@ void solve(){
 		for(ll num : v){
 			if(num%prime){
 				cout<<prime<<endl;
-				return;
+				return;z
 			}
 			
 		}

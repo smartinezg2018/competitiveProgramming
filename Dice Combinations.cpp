@@ -17,7 +17,7 @@ void solve(){
 			v[i] = (v[i]+v[i-j])%mod;
 		}
 	}
-	cout<<v[n];	
+	cout<<v[n];			
 }
  
 int main(){

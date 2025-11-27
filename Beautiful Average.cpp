@@ -40,6 +40,12 @@
 	}
 
 	void solve(){
+		int n; cin>>n;
+		vector<int> v(n);
+		forn(i,n) cin>>v[i];
+		cout<<*max_element(all(v))<<endl;
+		
+
 		
 	}
 
@@ -47,8 +53,8 @@
 		ios_base::sync_with_stdio(false);
 		cin.tie(NULL); cout.tie(NULL);
 		cout << setprecision(20)<< fixed;
-		// ll t; cin>>t; 
-		// while(t--)
+		ll t; cin>>t; 
+		while(t--)
 		solve();
 		return 0;
 	}

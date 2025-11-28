@@ -39,27 +39,7 @@
 	return os << "("<< pa.fi << ", " << pa.se << ")";
 	}
 
-    bool ispalindrome(string s){
-        string temp = s;
-        reverse(all(temp));
-        return (s == temp);
-    }
-
-    bool isEnc(string s){
-        for1(i,s.size()){
-            if(s[i]<s[i-1]) return false;
-        }
-        return true;
-    }
-
 	void solve(){
-        int n; cin>>n;
-		string s;cin>>s;
-        if(ispalindrome(s))
-            cout<<s<<endl;
-
-		
-
 		
 	}
 
@@ -67,8 +47,8 @@
 		ios_base::sync_with_stdio(false);
 		cin.tie(NULL); cout.tie(NULL);
 		cout << setprecision(20)<< fixed;
-		ll t; cin>>t; 
-		while(t--)
+		// ll t; cin>>t; 
+		// while(t--)
 		solve();
 		return 0;
 	}

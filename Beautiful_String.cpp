@@ -39,8 +39,22 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+
 void solve(){
-    cout<<"Hello, World!"<<el;
+    int n; cin>>n;
+    string s; cin>>s;
+
+    int count = 0;
+    forn(i,s.size()){
+        if(s[i]=='1')count++;
+    }
+    cout<<count<<endl;
+
+    forn(i,s.size()){
+        if(s[i]=='1')cout<<i+1<<" ";
+    }
+    cout<<endl;
+
 
 }
 
@@ -48,8 +62,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

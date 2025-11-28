@@ -39,8 +39,66 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+string to_bit(ll n){
+    string s = "";
+    while(n>0){
+        if(n%2==0){
+            s+='0';
+        }
+        else{
+            s+='1';
+        }
+        n/=2;
+    }
+    reverse(all(s));
+    return s;
+}
+
+ll to_decimal(string s){
+    ll ans = 0;
+    for(int i = 0 ;i <s.size();i++){
+        if(s[s.size()-1-i]=='1') ans += (1<<i);
+    }
+    return ans;
+}
+
+
+
 void solve(){
-    cout<<"Hello, World!"<<el;
+    ll a,b;cin>>a>>b;
+    string as = to_bit(a),bs = to_bit(b);
+    if(as.size()<bs.size()){
+        cout<<-1<<endl;
+        return;
+    }
+
+    while(as.size()>bs.size())
+        bs.insert(0,1,'0');
+
+    
+    vector<int> v;
+    forn(i,as.size()){
+        int index = as.size()-1-i;
+        if(as[index]=='0'){
+            if(bs[index]=='1')
+                v.push_back(i);
+        }
+        else{
+            if(bs[index]=='0')
+                v.push_back(i);
+
+        }
+    }
+    // reverse(all(ans));
+    // cout<<as<<endl<<bs<<endl;
+    cout<<v.size()<<endl;
+    if(v.size()==0)return;
+    for(int& n:v){
+        cout<<(1<<n)<<" ";
+    }
+    cout<<endl;
+
+
 
 }
 
@@ -48,8 +106,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

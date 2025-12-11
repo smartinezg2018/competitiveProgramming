@@ -41,6 +41,22 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
+    ll n;
+    cin>>n;
+    set<int> s;
+    ll a;
+    forn(i,n){
+        cin>>a;
+        s.insert(a);
+    }
+    if(s.find(s.size())!=s.end()){
+        cout<<s.size()<<endl;
+        return;
+    }
+
+    ll num = s.size();
+    cout<<*upper_bound(all(s),num)<<endl;  
+
 
 }
 
@@ -48,8 +64,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

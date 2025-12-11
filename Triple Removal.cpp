@@ -27,7 +27,6 @@ typedef vector<ll> vll;
 typedef vector<ld> vd;
 typedef array<int,2> v2;
 
-
 const int inf = 1e9;
 const int nax = 1e5+200;
 const ld pi = acos(-1);
@@ -41,6 +40,43 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
+	int n,q;
+	cin>>n>>q;
+	vi v(n);
+	forn(i,n)
+		cin>>v[i];
+	vector<v2> que(q);
+	forn(i,q){
+		cin>>que[i][0]>>que[i][1];
+		que[i][0]--;
+		que[i][1]--;
+	}
+	
+	vi pre1 = v;
+	partial_sum(all(pre1),pre1.begin());
+	
+	vi pre2(n);
+	for1(i,n-1){
+		if(v[i]==v[i-1]) 
+			pre2[i] = 1;
+	}
+
+	partial_sum(all(pre2),pre2.begin());
+	
+	for(auto [l, r]: que){
+		int ones = pre1[r]-(l-1>=0? pre1[l-1]:0);
+		if(ones%3!=0 || (r-l+1)%3!=0){
+			cout<<-1<<endl;
+			continue;
+		}
+		bool repeat = (pre2[r]-(l-1>=0? pre2[l]:0))>0;
+		cout<<((r-l+1)/3)+(!repeat)<<endl;
+		
+	}
+	
+	
+		
+		
 
 }
 
@@ -48,8 +84,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

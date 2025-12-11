@@ -25,7 +25,6 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
-typedef array<int,2> v2;
 
 
 const int inf = 1e9;
@@ -41,6 +40,24 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
+	int n; cin>>n;
+	vector<ll> v(n);
+	for(int  i= 0; i < n;i++){
+		cin>>v[i];
+	}
+	sort(v.begin(),v.end());
+	// cout<<v[0];
+	queue<int> q;
+	q.push(v[0]);
+	ll mx = 1;
+	for(int i = 1;i<n;i++){
+		q.push(v[i]);
+		while(q.size()>0 && q.front()<v[i]-5){
+			q.pop();
+		}
+		mx = max(mx,(ll)q.size());
+	}
+	cout<<mx<<endl;
 
 }
 

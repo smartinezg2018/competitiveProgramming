@@ -41,6 +41,37 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
+	ll n,c; cin>>n>>c;
+	vll w(n);
+	vll v(n);
+	forn(i,n){	
+		cin>>w[i];
+		cin>>v[i]; 
+	}
+	vector<vll> ans(n,vll(c+1));
+	
+	forn(i,n){
+		ll book = w[i];
+		for(ll j = book;j<=c;j++){
+			ans[i][j] = v[i];
+		}
+	}
+	
+
+	for1(i,n-1){
+		ll book = w[i];
+		for1(j,c){
+			ans[i][j] = max(ans[i-1][j],(j-book>0? ans[i-1][j-book]:0)+ans[i][j]);
+			
+		}
+	}
+	// forn(i,n){
+		// forn(j,c+1)
+			// cout<<ans[i][j]<<"  ";
+		// cout<<endl;
+	// }
+	cout<<ans[n-1][c]<<endl;
+	
 
 }
 

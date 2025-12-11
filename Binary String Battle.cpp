@@ -25,7 +25,6 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
-typedef array<int,2> v2;
 
 
 const int inf = 1e9;
@@ -41,6 +40,22 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
+	int n,k; cin>>n>>k;
+	vector<char> v(n);
+	int o = 0,z = 0;
+	forn(i,n){
+		cin>>v[i];
+		if(v[i]=='1') o++;
+	}
+	z = n-o;
+	if(k>=o || k>n/2){
+		cout<<"Alice"<<endl;
+		return;
+	}
+	cout<<"Bob"<<endl;
+	
+		
+	
 
 }
 
@@ -48,8 +63,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

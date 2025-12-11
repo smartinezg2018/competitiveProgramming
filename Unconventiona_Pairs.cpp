@@ -41,6 +41,16 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
+    ll n; cin>>n;
+    vi v(n);
+    forn(i,n) cin>>v[i];
+    sort(v.begin(),v.end());
+    ll mx = 0;
+    for(int i = 1; i < n;i+=2){
+        mx = max(mx,(ll)v[i]-v[i-1]);
+    }
+    cout<<mx<<el;
+
 
 }
 
@@ -48,8 +58,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

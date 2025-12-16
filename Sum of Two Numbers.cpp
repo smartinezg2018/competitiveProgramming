@@ -40,26 +40,60 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+int sum(int n){
+    int acum = 0;
+    while(n>0){
+        acum+=n%10;
+        n/=10;
+    }
+    return acum;
+}
 
 void solve(){
-    ll n;
+    int n;
     cin>>n;
-    string s;
-    cin>>s;
-    s+=s;
-    ll j;
-    ll mx = 0;
-    for(int i = 1; i <= n ; i++){
-        j = i;
-        while(s[j] == '0' && j<s.size())
-{            j++;
-            // cout<<j<<endl;
-        }
-        mx = max(j-i,mx);
-        i = j;
-        
+    if(n%2==0){
+        cout<<n/2<<" "<<n/2<<endl;
+        return;
     }
-    cout<<mx<<endl;
+    
+    int cur,a = 0,b = 0;
+    string c = "",d = "";
+    while(n>0){
+        cur = n%10;
+        n/=10;
+        if(cur%2==0){
+            c+= to_string(cur/2);
+            d+= to_string(cur/2);
+        }
+        else{
+            if(a<b){            
+                a+= (cur+1)/2;
+                b+= cur/2;
+                c+= to_string((cur+1)/2);
+                d+= to_string((cur)/2);
+
+            }
+            else{
+                a+= cur/2;
+                b+= (cur+1)/2;
+                c+= to_string((cur)/2);
+                d+= to_string((cur+1)/2);
+            }
+        }
+
+
+    }
+    // cout<<c<<" "<<d<<endl;
+    // return;
+    reverse(c.begin(),c.end());
+    reverse(d.begin(),d.end());
+    
+
+    cout<< stoi(c)<<" "<< stoi(d)<<endl;
+
+    
+
     
 }
 

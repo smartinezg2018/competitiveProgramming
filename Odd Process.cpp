@@ -44,18 +44,63 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 void solve(){
     ll n;
     cin>>n;
-    vector<ll> v(n);
-    priority_queue<ll> odd,even;
+    vector<ll> e,o;
+    ll temp;
     forn(i,n){
-        cin>>v[i];
-        if(v[i]%2==0)
-            even.push(v[i]);
+        cin>>temp;
+        if(temp%2==0)
+            e.push_back(temp);
         else
-            odd.push(v[i]);
+            o.push_back(temp);
     }
-        
+
+    sort(all(e));
+    sort(all(o));
+    reverse(all(e));
+    reverse(all(o));
+
     
+    if(o.size() == 0){
+        forn(i,n)
+            cout<<0<<" ";
+        cout<<endl;
+        return;
+    }
+    if(e.size() == 0){
+        for(int i = 1; i<=n;i++){
+            if(i%2==0){
+                cout<<0<<" ";
+            }
+            else{
+                cout<<o[0]<<" ";
+            }
+        }
+        cout<<endl;
+        return;
+
+    }
+
+    partial_sum(all(e),e.begin());
     
+    ll l, acum;
+    for1(k,n){
+        l = 0;
+        acum = 0;
+        while(k-l>e.size()+1)
+            l+=2;
+
+        if(l >= o.size()){
+            cout<<0<<" ";
+            continue;
+        }
+         
+        acum += o[0];
+        if(k-l-2<e.size() && k-l-2>=0)
+            acum+=e[k-l-2];
+        cout<<acum<<" ";
+    }
+    cout<<endl;
+
     
 }
 

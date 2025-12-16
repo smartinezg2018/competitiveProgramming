@@ -40,27 +40,24 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-
 void solve(){
-    ll n;
+    int n;
     cin>>n;
-    string s;
-    cin>>s;
-    s+=s;
-    ll j;
-    ll mx = 0;
-    for(int i = 1; i <= n ; i++){
-        j = i;
-        while(s[j] == '0' && j<s.size())
-{            j++;
-            // cout<<j<<endl;
-        }
-        mx = max(j-i,mx);
-        i = j;
-        
+    vector<int> v(n);
+    forn(i,n)
+        cin>>v[i];
+    vector<int> prev = v, pos = v;
+    for(int i = 1; i <n;i++){
+        prev[i] = min(prev[i-1],prev[i]);
+        pos[n-i-1] = max(pos[n-i-1],pos[n-i]);
     }
-    cout<<mx<<endl;
-    
+    for1(i,n-1){
+        if(prev[i-1]>pos[i]){
+            cout<<"NO"<<endl;
+            return;
+        }
+    }
+    cout<<"YES"<<endl;
 }
 
 int main(){

@@ -40,35 +40,16 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-
 void solve(){
-    ll n;
-    cin>>n;
-    string s;
-    cin>>s;
-    s+=s;
-    ll j;
-    ll mx = 0;
-    for(int i = 1; i <= n ; i++){
-        j = i;
-        while(s[j] == '0' && j<s.size())
-{            j++;
-            // cout<<j<<endl;
-        }
-        mx = max(j-i,mx);
-        i = j;
-        
-    }
-    cout<<mx<<endl;
-    
+
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    ll t; cin>>t;
-    while(t--)
+    // ll t; cin>>t;
+    // while(t--)
     solve();
     return 0;
 }

@@ -40,7 +40,34 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+bool ispalindrome(string s){
+    string j = s;
+    reverse(all(j));
+    if(s == j) return true;
+    return false;
+}
+
 void solve(){
+    string s;
+    cin>>s;
+    forn(i,s.size()){
+        char base = s[i];
+        forn(j,27){
+            char c = j + 'a';
+            s[i] = c;
+            if(c == base)   
+                continue;
+            if(ispalindrome(s)){
+                cout<<"YES"<<endl;
+                return;
+            }
+        }
+        s[i] = base;
+
+    }
+    cout<<"NO"<<endl;
+    return;
+
 
 }
 

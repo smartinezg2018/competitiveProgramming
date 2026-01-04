@@ -25,6 +25,7 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
+typedef array<int,2> v2;
 
 
 const int inf = 1e9;
@@ -39,36 +40,52 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-bool ispalindrome(string s){
-	string temp = s;
-	reverse(all(temp));
-	return (s == temp);
-}
-
-bool isEnc(string s){
-	for1(i,s.size()){
-		if(s[i]<s[i-1]) return false;
-	}
-	return true;
-}
-
 void solve(){
-	int n; cin>>n;
-	string s;cin>>s;
-	if(ispalindrome(s))
-		cout<<s<<endl;
+    int n,k; cin>>n>>k;
+    string s; cin>>s;
+    ll total = 0;
 
-	
+    for(int i = 0;i<(k)/2;i++){
+        map<char, int> m;
+        int mx = 0;
+        for(int j = i; j<n;j+=k){
+            m[s[j]]++;
+            m[s[n-1-j]]++; 
+        }
 
-	
+        for(auto [letter,num]:m){
+            mx = max(mx,num);
+        }
+        // bool last = (k%2!=0 && i==k/2);
+        total+=(n/k)*(2)-mx;
+    }
+
+    if(k%2!=0){
+        map<char, int> m;
+        int mx = 0;
+        for(int j = (k)/2; j<n;j+=k){
+            m[s[j]]++;
+        }
+
+        for(auto [letter,num]:m){
+            mx = max(mx,num);
+        }
+        // bool last = (k%2!=0 && i==k/2);
+        total+=(n/k)-mx;
+    }
+
+
+    cout<<total<<el;
+    // for()
+
 }
 
 int main(){
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
-	cout << setprecision(20)<< fixed;
-	ll t; cin>>t; 
-	while(t--)
-	solve();
-	return 0;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    cout << setprecision(20)<< fixed;
+    ll t; cin>>t;
+    while(t--)
+    solve();
+    return 0;
 }

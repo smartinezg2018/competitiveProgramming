@@ -25,6 +25,7 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
+typedef array<int,2> v2;
 
 
 const int inf = 1e9;
@@ -39,36 +40,36 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-bool ispalindrome(string s){
-	string temp = s;
-	reverse(all(temp));
-	return (s == temp);
-}
-
-bool isEnc(string s){
-	for1(i,s.size()){
-		if(s[i]<s[i-1]) return false;
-	}
-	return true;
-}
 
 void solve(){
-	int n; cin>>n;
-	string s;cin>>s;
-	if(ispalindrome(s))
-		cout<<s<<endl;
+    string o,r;
+    cin>>o>>r;
+    map<char,int> m1,m2;
+    for(char c:o)
+        m1[c]++;
+    for(char c:r)
+        m2[c]++;
 
-	
+    if(m2['?']==0){
+        if(m2['+']-m2['-']== m1['+']-m1['-']){
+            cout<<1.0<<el;
+        }
+        else{
+            cout<<0.0<<el;
+        }
+    }
+    
+    cout<<m2['l']<<endl;
 
-	
 }
 
 int main(){
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
-	cout << setprecision(20)<< fixed;
-	ll t; cin>>t; 
-	while(t--)
-	solve();
-	return 0;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    cout << setprecision(9)<< fixed;
+    // ll t; cin>>t;
+    // while(t--)
+    solve();
+    return 0;
 }
+    

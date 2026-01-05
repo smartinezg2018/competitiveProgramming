@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
- 
+
 #define fi first
 #define se second
 #define forn(i,n) for(int i=0; i< (int)n; ++i)
@@ -13,9 +13,9 @@
 #define ri(n) scanf("%d",&n)
 #define sz(v) int(v.size())
 #define all(v) v.begin(),v.end()
- 
+
 using namespace std;
- 
+
 typedef long long ll;
 typedef double ld;
 typedef pair<int,int> ii;
@@ -26,43 +26,46 @@ typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
 typedef array<int,2> v2;
- 
- 
+
+
 const int inf = 1e9;
 const int nax = 1e5+200;
 const ld pi = acos(-1);
 const ld eps= 1e-9;
- 
+
 int dr[] = {1,-1,0, 0,1,-1,-1, 1};
 int dc[] = {0, 0,1,-1,1, 1,-1,-1};
- 
+
 ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
- 
+
 void solve(){
-    ll n,l; cin>>n>>l;
-    vector<ll> v(n);
- 
-    forn(i,n) cin>>v[i];
-    sort(all(v));
-    double mx = 0;
-    forn(i,n-1){
-        mx = max(mx,(double)(v[i+1]-v[i])/2);
+    ll n,k;cin>>n>>k;
+    if(n==1 && k==2){
+        cout<<"YES"<<el;
+        return;
     }
-    mx = max(mx,(double)max(v[0],l-v[n-1]));
-    cout<<(double)mx<<el;
- 
-    
- 
+    if(k>1 || n ==1){
+        cout<<"NO"<<el;
+        return;
+    }
+    for(int i = 2; i*i<=n;i++){
+        if(n%i==0){
+            cout<<"NO"<<el;
+            return;
+        }
+    }
+    cout<<"YES"<<el;
+
 }
- 
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    cout << setprecision(10)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    cout << setprecision(20)<< fixed;
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

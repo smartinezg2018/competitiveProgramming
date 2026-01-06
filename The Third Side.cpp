@@ -42,6 +42,16 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
+    int n; cin>>n;
+    vector<int> v(n);
+    forn(i,n) cin>>v[i];
+    
+    ll total = 0;
+    total = v[0];
+    for1(i,n-1){
+        total += v[i];
+    }
+    cout<<total-(n-1)<<el;
 
 }
 
@@ -49,8 +59,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

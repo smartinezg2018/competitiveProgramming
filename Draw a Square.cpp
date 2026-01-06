@@ -42,6 +42,16 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
+    vector<int> v(4);
+    forn(i,4) cin>>v[i];
+    forn(i,3){
+        if(v[i] != v[i+1]){
+            cout<<"NO"<<el;
+            return;
+        }
+    }
+    cout<<"YES"<<el;
+
 
 }
 
@@ -49,8 +59,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

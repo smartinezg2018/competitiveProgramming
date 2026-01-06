@@ -41,7 +41,23 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+ll gauss(ll n){
+    return n*(n+1)/2;
+}
+
 void solve(){
+    ll acum = 0, ans = 0;
+    ll n; cin>>n;
+    vi v(n);    
+    forn(i,n) {cin>>v[i];acum+=v[i];}
+    forn(i,n-1){
+        acum -= v[i];
+        ans = (ans+ v[i]*acum)%mod;
+        // d(ans);
+    }
+    cout<<ans/gauss(n-1)<<el;
+
+
 
 }
 
@@ -49,8 +65,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

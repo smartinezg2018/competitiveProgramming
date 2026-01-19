@@ -25,12 +25,14 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
+typedef array<int,2> v2;
 
 
 const int inf = 1e9;
 const int nax = 1e5+200;
 const ld pi = acos(-1);
 const ld eps= 1e-9;
+const ll mod = 1e9+7;
 
 int dr[] = {1,-1,0, 0,1,-1,-1, 1};
 int dc[] = {0, 0,1,-1,1, 1,-1,-1};
@@ -40,7 +42,40 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    cout<<"Hello, World!"<<el;
+    int n;cin>>n;
+    vector<vector<ll>> v;
+    forn(i,n){
+        int m; cin>>m;
+        vector<ll> temp(m);
+        forn(j,m){
+            cin>>temp[j];    
+        }
+        sort(all(temp));
+        reverse(all(temp));
+        v.pb(temp);
+    }
+    // cout<<v[0][0]<<el;
+    ll mn = v[0][sz(v[0])-2];
+    ll absmn = v[0][sz(v[0])-1];
+    int index = 0;
+    for1(i,n-1){
+        if(v[i][sz(v[i])-1]<absmn){
+            absmn = v[i][sz(v[i])-1];
+        }
+        if(v[i][sz(v[i])-2]<mn){
+            mn = v[i][sz(v[i])-2];
+            index = i;
+        }  
+    }
+    
+    ll acum = absmn;
+    forn(i,n){
+        if(i == index) continue;
+        acum += v[i][sz(v[i])-2];
+    }
+    cout<<acum<<el;
+
+    
 
 }
 
@@ -48,8 +83,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

@@ -25,12 +25,14 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
+typedef array<int,2> v2;
 
 
 const int inf = 1e9;
 const int nax = 1e5+200;
 const ld pi = acos(-1);
 const ld eps= 1e-9;
+const ll mod = 1e9+7;
 
 int dr[] = {1,-1,0, 0,1,-1,-1, 1};
 int dc[] = {0, 0,1,-1,1, 1,-1,-1};
@@ -40,7 +42,19 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    cout<<"Hello, World!"<<el;
+    ll n,k; cin>>n>>k;
+    vector<v2> v(n);
+    forn(i,n){
+        cin>>v[i][0];
+        v[i][1] = -i;
+    }
+    sort(all(v));
+    reverse(all(v));
+    forn(i,n){
+        cout<<-v[i][1]+1<<" ";
+    }
+    cout<<el;
+
 
 }
 
@@ -48,8 +62,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

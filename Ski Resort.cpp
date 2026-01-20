@@ -42,21 +42,22 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n,k; cin>>n>>k;
-    vector<array<ll,2>> v(n);
+    ll n,k,q; cin>>n>>k>>q;
+    vector<ll> v(n+1);
+    forn(i,n) cin>>v[i];
+    v[n] = q+1;
+    ll acum = 0;
     forn(i,n){
-        cin>>v[i][0];
-        v[i][0] = (v[i][0]%k == 0? k : v[i][0]%k);
-        v[i][1] = -i;
-    }
-    sort(all(v));
-    reverse(all(v));
-    forn(i,n){
-        cout<<-v[i][1]+1<<" ";
-    }
-    cout<<el;
+        int j = i;
+        while(j<n && v[j]<=q)
+            j++;
+        if(j-i>=k){
+            acum+=(j-i-(k-1))*(j-i+1-(k-1))/2;
+        }
+        i=j;
 
-
+    }
+    cout<<acum<<el;
 }
 
 int main(){

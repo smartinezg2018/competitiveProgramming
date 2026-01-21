@@ -25,7 +25,7 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
-typedef array<ll,2> v2;
+typedef array<int,2> v2;
 
 
 const int inf = 1e9;
@@ -41,7 +41,28 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+vll dp(nax,-1);
+int k;
+
+ll rec(vi& v, int i){
+    if(i < 1) return 0;
+    ll mn = rec(v,i-1)+abs(v[i]-v[i-1]);
+    for(int j = 2;j<=k;j++){
+        if(i-j<0) break;
+        if(dp[i-j]>=0)
+            mn =  min(mn,dp[i-j]+abs(v[i]-v[i-j]));
+        else
+            mn = min(mn,rec(v,i-j)+abs(v[i]-v[i-j]));
+    }
+    dp[i] = mn;
+    return mn;
+}
+
 void solve(){
+    int n; cin>>n>>k;
+    vi v(n); forn(i,n) cin>>v[i];
+    ll ans = rec(v,n-1);
+    cout<<ans<<el;
 
 }
 

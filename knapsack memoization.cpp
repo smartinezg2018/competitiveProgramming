@@ -41,7 +41,36 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+
+ll recursive(vector<v2> v, int index,ll weight,vector<vector<ll>>& memoization){
+    if(weight == 0 || index == v.size()) return 0;
+    if(weight<v[index][0]){
+        if(index == v.size()-1) return 0;
+        return (memoization[index+1][weight]>=0?memoization[index+1][weight]:recursive(v,index+1,weight,memoization));
+    }
+    else{
+        if(index == v.size()-1) return v[index][1];
+        ll mx = 0;
+        mx = (memoization[index+1][weight-v[index][0]]>=0?
+            v[index][1]+memoization[index+1][weight-v[index][0]]:
+            v[index][1]+recursive(v,index+1,weight-v[index][0],memoization));
+        mx = max(mx,
+            (memoization[index+1][weight]>=0?
+            memoization[index+1][weight]:
+            recursive(v,index+1,weight,memoization))
+        );
+        memoization[index][weight] = mx;
+        return mx;
+    }
+}
+
 void solve(){
+    int n,w; cin>>n>>w;
+    vector<v2> v(n);
+    forn(i,n) cin>>v[i][0]>>v[i][1];
+    vector<vector<ll>> memoization(n,vector<ll> (w+1,-1));
+    cout<<recursive(v,0,w, memoization);
+
 
 }
 

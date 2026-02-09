@@ -42,32 +42,36 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n; cin>>n;
-    vector<vector<ll>> v(n ,vector<ll>(3)), ans(n ,vector<ll>(n));
-    forn(i,n) cin>>v[i][0]>>v[i][1]>>v[i][2];
-    
-    vector<ll> mx(3);
-    mx[0] = v[0][0];
-    mx[1] = v[0][1];
-    mx[2] = v[0][2];
-    
-    for1(i,n-1){
-        ans[i][0] = max({mx[1],mx[2]})+v[i][0];
-        ans[i][1] = max({mx[0],mx[2]})+v[i][1];
-        ans[i][2] = max({mx[1],mx[0]})+v[i][2];
+    string a,b; cin>>a>>b;
+    int n = sz(a), m = sz(b);
 
-        mx[0] = max(mx[0],v[i][0]);
-        mx[1] = max(mx[1],v[i][1]);
-        mx[2] = max(mx[2],v[i][2]);
+    vector<vector<int>> v(n,vector<int> (m));
+    bool flag = false;
+    forn(i,m){
+        if(a[0] == b[i]) flag = true;
+        if(flag) v[0][i] = 1;
+        else v[0][i] = 0;
+    }
+    
+    string s = "";
+    for(int i = 1;i < n;i++){
+        for(int j = 1;j < m;j++){
+            if(a[i]==b[j]) v[i][j]++;
+            v[i][j] = max(v[i-1][j-1]+v[i][j],v[i][j-1]);
+            v[i][j] = max(v[i][j],v[i-1][j]);
+            if(v[i][j]==v[i-1][j-1]+1 && a[i]==b[j]) s +=a[i];
+        }
     }
 
     for1(i,n-1){
-        v[i][0] = v[i][0] + max(ans[i-1][1],ans[i-1][2]);
-        v[i][1] = v[i][1] + max(ans[i-1][0],ans[i-1][2]);
-        v[i][2] = v[i][2] + max(ans[i-1][0],ans[i-1][1]);
+        for1(j,m-1){
+            cout<<v[i][j]<<" ";
+        }
+        cout<<el;
     }
 
-    cout<<max({v[n-1][0],v[n-1][1],v[n-1][2]})<<el;
+    cout<<v[n-1][m-1];
+
 
 }
 
@@ -75,8 +79,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    ll t; cin>>t;
-    while(t--)
+    // ll t; cin>>t;
+    // while(t--)
     solve();
     return 0;
 }

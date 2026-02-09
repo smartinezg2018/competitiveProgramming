@@ -42,32 +42,30 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n; cin>>n;
-    vector<vector<ll>> v(n ,vector<ll>(3)), ans(n ,vector<ll>(n));
-    forn(i,n) cin>>v[i][0]>>v[i][1]>>v[i][2];
-    
-    vector<ll> mx(3);
-    mx[0] = v[0][0];
-    mx[1] = v[0][1];
-    mx[2] = v[0][2];
-    
-    for1(i,n-1){
-        ans[i][0] = max({mx[1],mx[2]})+v[i][0];
-        ans[i][1] = max({mx[0],mx[2]})+v[i][1];
-        ans[i][2] = max({mx[1],mx[0]})+v[i][2];
+    ll n,q; cin>>n>>q;
+    vector<int> a(n),b(n);
+    forn(i,n) cin>>a[i];
+    forn(i,n) cin>>b[i];
 
-        mx[0] = max(mx[0],v[i][0]);
-        mx[1] = max(mx[1],v[i][1]);
-        mx[2] = max(mx[2],v[i][2]);
+    vector<v2> qu(q);
+    forn(i,q) {cin>>qu[i][0]>>qu[i][1];qu[i][1]--;qu[i][0]--;}
+
+    a[n-1] = max(a[n-1],b[n-1]);
+
+    for(int i = n-2;i>=0;i--){
+        a[i] = max(max(a[i],b[i]),a[i+1]);
     }
 
-    for1(i,n-1){
-        v[i][0] = v[i][0] + max(ans[i-1][1],ans[i-1][2]);
-        v[i][1] = v[i][1] + max(ans[i-1][0],ans[i-1][2]);
-        v[i][2] = v[i][2] + max(ans[i-1][0],ans[i-1][1]);
-    }
+    partial_sum(all(a),a.begin());
 
-    cout<<max({v[n-1][0],v[n-1][1],v[n-1][2]})<<el;
+    forn(i,q){
+        // d(qu[i][0]);
+        cout<<a[qu[i][1]]-(qu[i][0] == 0? 0: a[qu[i][0]-1])<<" ";
+    }
+    cout<<el;
+
+
+
 
 }
 

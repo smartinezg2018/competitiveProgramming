@@ -25,6 +25,7 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
+typedef array<int,2> v2;
 
 
 const int inf = 1e9;
@@ -40,21 +41,31 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-	int n,k; cin>>n>>k;
-	vector<char> v(n);
-	int o = 0,z = 0;
-	forn(i,n){
-		cin>>v[i];
-		if(v[i]=='1') o++;
+	ll n,c; cin>>n>>c;
+	vll w(n);
+	vll v(n);
+	forn(i,n){	
+		cin>>w[i];
+		cin>>v[i]; 
 	}
-	z = n-o;
-	if(k>=o || k>n/2){
-		cout<<"Alice"<<endl;
-		return;
-	}
-	cout<<"Bob"<<endl;
+	vector<vll> ans(n,vll(c+1));
 	
-		
+	forn(i,n){
+		ll book = w[i];
+		for(ll j = book;j<=c;j++){
+			ans[i][j] = v[i];
+		}
+	}
+	
+
+	for1(i,n-1){
+		ll book = w[i];
+		for1(j,c){
+			ans[i][j] = max(ans[i-1][j],(j-book>0? ans[i-1][j-book]:0)+ans[i][j]);
+			
+		}
+	}
+	cout<<ans[n-1][c]<<endl;
 	
 
 }
@@ -63,8 +74,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    ll t; cin>>t;
-    while(t--)
+    // ll t; cin>>t;
+    // while(t--)
     solve();
     return 0;
 }

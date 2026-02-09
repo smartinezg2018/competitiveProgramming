@@ -25,12 +25,14 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
+typedef array<ll,2> v2;
 
 
 const int inf = 1e9;
 const int nax = 1e5+200;
 const ld pi = acos(-1);
 const ld eps= 1e-9;
+const ll mod = 1e9+7;
 
 int dr[] = {1,-1,0, 0,1,-1,-1, 1};
 int dc[] = {0, 0,1,-1,1, 1,-1,-1};
@@ -40,8 +42,15 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    cout<<"Hello, World!"<<el;
-
+        ll base = 10;
+        ll temp = 10;
+        for(int j = 2;j*j<=temp;j++){
+            while(base>0 && base%j==0){
+                base/=j;
+                cout<<j<<el;
+                cout<<base/j<<el;
+            }
+        }
 }
 
 int main(){

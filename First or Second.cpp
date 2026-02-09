@@ -25,13 +25,14 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
-typedef array<int,2> v2;
+typedef array<ll,2> v2;
 
 
 const int inf = 1e9;
 const int nax = 1e5+200;
 const ld pi = acos(-1);
 const ld eps= 1e-9;
+const ll mod = 1e9+7;
 
 int dr[] = {1,-1,0, 0,1,-1,-1, 1};
 int dc[] = {0, 0,1,-1,1, 1,-1,-1};
@@ -40,18 +41,42 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-
 void solve(){
-    ll n;
-    cin>>n;
-    vi v(n), v;
-    forn(i,n) cin>>v[i];
-
-    ll acum = 0;
-    forn(i,n-1){
-        
+    ll n; cin>>n;
+    ll pos = 0,neg = 0;
+    vector<ll> v(n),ans; 
+    forn(i,n) {
+        cin>>v[i];
+        if(v[i]<0) neg-=v[i];
+        else pos+=v[i];
     }
-    cout<<acum<<el;
+
+    forn(i,n){
+        bool neg = (v[i]<0? true: false);
+        int j = i;
+        ll acum = 0;
+        if(neg){
+            while(j<n && v[j]<=0){
+                // acum+=v[j];
+                acum += abs(v[j]);
+                j++;
+            }
+        }
+        else{
+            while(j<n && v[j]>=0){
+                // acum+=v[j];
+                acum += v[j];
+                j++;
+            }
+        }
+        ans.pb(acum);
+        i = j-1;
+    }
+
+    if(v)
+
+    
+
 
 }
 
@@ -64,4 +89,3 @@ int main(){
     solve();
     return 0;
 }
-    

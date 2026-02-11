@@ -42,34 +42,24 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n; cin>>n;
-    vll v(n);
-    forn(i,n) 
-        cin>>v[i];
+    // ll n; cin>>n;
+    string s; cin>>s;
 
-    map<ll,ll> m;
-    forn(i,n){
-        while(v[i]%2==0){
-            m[2]++;
-            v[i]/=2;    
+    ll acum = 1, count = 0;
+    forn(i,s.size()-1){
+        int j = i+1;
+        while(j<s.size() && s[i]==s[j]){
+            j++;
+        }
+        if(j>i+1) {
+            count+=j-i-1;
+            acum = ((j-i)*acum)%998244353;
+            i = j-1;
         }
         
-        for(int j = 3;j*j<=v[i];j+=2){
-            while(v[i]%j==0){
-                m[j]++;
-                v[i]=v[i]/j;
-            }
-        }
-        if(v[i]>1) m[v[i]]++;   
     }
+    cout<<count<<" "<<acum<<el;
     
-    for(auto[key,item] :m){
-        if(item%n!=0){
-            cout<<"NO"<<el;
-            return;
-        }
-    }
-    cout<<"YES"<<el;
 
 }
 

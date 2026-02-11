@@ -42,34 +42,27 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n; cin>>n;
+    int n; cin>>n;
     vll v(n);
-    forn(i,n) 
+    forn(i,n) {
         cin>>v[i];
-
-    map<ll,ll> m;
-    forn(i,n){
-        while(v[i]%2==0){
-            m[2]++;
-            v[i]/=2;    
-        }
-        
-        for(int j = 3;j*j<=v[i];j+=2){
-            while(v[i]%j==0){
-                m[j]++;
-                v[i]=v[i]/j;
-            }
-        }
-        if(v[i]>1) m[v[i]]++;   
     }
+    ll mn = *max_element(all(v));
+    ll base = 1;
     
-    for(auto[key,item] :m){
-        if(item%n!=0){
-            cout<<"NO"<<el;
+    for(int i = 1;base<=mn;i++){
+        base*=2;
+        set<ll> s;
+        forn(j,n){
+            s.insert(v[j]%base);
+            if(sz(s)>2) break;
+        }
+        if(s.size()==2){
+            cout<<base<<el;
             return;
         }
+        s.clear();
     }
-    cout<<"YES"<<el;
 
 }
 

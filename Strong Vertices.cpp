@@ -43,33 +43,28 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 
 void solve(){
     ll n; cin>>n;
-    vll v(n);
-    forn(i,n) 
-        cin>>v[i];
+    vll a(n),b(n);
+    forn(i,n) cin>>a[i];
+    forn(i,n) cin>>b[i];
 
-    map<ll,ll> m;
+    vll ao = a, bo = b;
+    sort(all(ao));
+    sort(all(bo));
+
+    vll ans;
+
+
     forn(i,n){
-        while(v[i]%2==0){
-            m[2]++;
-            v[i]/=2;    
-        }
-        
-        for(int j = 3;j*j<=v[i];j+=2){
-            while(v[i]%j==0){
-                m[j]++;
-                v[i]=v[i]/j;
-            }
-        }
-        if(v[i]>1) m[v[i]]++;   
+        if(a[i]-*(lower_bound(all(ao),a[i])-1)< b[i]-bo[0])continue;
+        ans.pb(i+1);
     }
-    
-    for(auto[key,item] :m){
-        if(item%n!=0){
-            cout<<"NO"<<el;
-            return;
-        }
+    cout<<sz(ans)<<el;
+    forn(i,sz(ans)){
+        cout<<ans[i]<<" ";
     }
-    cout<<"YES"<<el;
+    cout<<el;
+
+
 
 }
 

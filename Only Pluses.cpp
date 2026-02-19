@@ -42,24 +42,14 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-long long n; // Use long long for n to be safe
-cin >> n;
-long long m = (n * (n - 1)) / 2;
-
-vector<int> v(m);
-for(int i = 0; i < m; i++) cin >> v[i];
-sort(v.begin(), v.end());
-
-int curr = n-1; 
-int i = 0;
-while(curr>0){
-    cout<<v[i]<<" ";
-    i+=curr;
-    curr--;
-}
-
-
-cout << 1000000000 << endl;
+    int a,b,c;
+    cin>>a>>b>>c;
+    for(int i = 0;i<5;i++){
+        if(a==min({a,b,c})) a++;
+        else if(b==min({a,b,c})) b++;
+        else if(c == min({a,b,c})) c++;
+    }
+    cout<<a*b*c<<el;
 
 }
 

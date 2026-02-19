@@ -42,25 +42,29 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-long long n; // Use long long for n to be safe
-cin >> n;
-long long m = (n * (n - 1)) / 2;
+    ll n,m,k; cin>>n>>m>>k;
+    string s; cin>>s;
 
-vector<int> v(m);
-for(int i = 0; i < m; i++) cin >> v[i];
-sort(v.begin(), v.end());
-
-int curr = n-1; 
-int i = 0;
-while(curr>0){
-    cout<<v[i]<<" ";
-    i+=curr;
-    curr--;
-}
-
-
-cout << 1000000000 << endl;
-
+    for(int i = -1;i<n;i++){
+        int j = i+1;
+        while(j<=min(i+m-1,n-1) && s[j]!='L') j++;
+        if(j==n){
+            cout<<"YES"<<el;
+            return;
+        }
+        
+        int w = j;
+        while(w<=n-1 && s[w]!='L'){
+            if(s[w]=='C' || k<=0){
+                cout<<"NO"<<el;
+                return;
+            }
+            k--;
+            w++;
+        }
+        i = w-1;
+    }
+    cout<<"YES"<<el;
 }
 
 int main(){

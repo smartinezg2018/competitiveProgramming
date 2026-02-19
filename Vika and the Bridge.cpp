@@ -42,29 +42,31 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n,m,k; cin>>n>>m>>k;
-    string s; cin>>s;
-
-    for(int i = -1;i<n;i++){
-        int j = i+1;
-        while(j<=min(i+m-1,n-1) && s[j]!='L') j++;
-        if(j==n){
-            cout<<"YES"<<el;
-            return;
-        } 
-        
-        int w = j;
-        while(w<=n-1 && s[w]!='L'){
-            if(s[w]=='C' || k<=0){
-                cout<<"NO"<<el;
-                return;
-            }
-            k--;
-            w++;
-        }
-        i = w-1;
+    ll n,k; cin>>n>>k;
+    vector<ll> v(n);
+    forn(i,n) cin>>v[i];
+    map<int,vector<int>> m;
+    
+    for(int i = 0; i <n;i++){
+        m[v[i]].pb(i);
     }
-    cout<<"YES"<<el;
+
+    vector<vector<int>> ans;
+    for(auto& [key,item]:m){
+        vector<int> temp = {item[0]};
+        for(int i = 1;i<sz(item);i++){
+            temp.pb(item[i]-item[i-1]-1);
+        }
+        temp.pb(n-item[sz(item)-1]-1);
+        ans.pb(temp);
+    }
+
+    int mn = inf;
+    for(vector<int> arr: ans){
+        sort(all(arr));
+        mn = min(mn,max(arr[sz(arr)-1]/2,arr[max(sz(arr)-2,0)]));
+    }
+    cout<<mn<<el;
 }
 
 int main(){

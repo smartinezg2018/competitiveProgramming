@@ -42,29 +42,23 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n,m,k; cin>>n>>m>>k;
-    string s; cin>>s;
-
-    for(int i = -1;i<n;i++){
-        int j = i+1;
-        while(j<=min(i+m-1,n-1) && s[j]!='L') j++;
-        if(j==n){
-            cout<<"YES"<<el;
-            return;
-        } 
-        
-        int w = j;
-        while(w<=n-1 && s[w]!='L'){
-            if(s[w]=='C' || k<=0){
-                cout<<"NO"<<el;
+    int n,m; cin>>n>>m;
+    string x,s;
+    cin>>x>>s;
+    int count = 0;
+    while(sz(x)<sz(s)*30){
+        for(int i = 0; i<sz(x)-sz(s)+1;i++){
+            if(x.substr(i,sz(s))==s){
+                cout<<count<<el;
                 return;
             }
-            k--;
-            w++;
         }
-        i = w-1;
+        count++;
+        x+=x;
     }
-    cout<<"YES"<<el;
+    cout<<-1<<el;
+
+
 }
 
 int main(){

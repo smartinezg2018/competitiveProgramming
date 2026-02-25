@@ -25,13 +25,14 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
-typedef array<int,2> v2;
+typedef array<ll,2> v2;
 
 
 const int inf = 1e9;
 const int nax = 1e5+200;
 const ld pi = acos(-1);
 const ld eps= 1e-9;
+const ll mod = 1e9+7;
 
 int dr[] = {1,-1,0, 0,1,-1,-1, 1};
 int dc[] = {0, 0,1,-1,1, 1,-1,-1};
@@ -40,26 +41,17 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-void solve(){
-    ll n,m,d;cin>>n>>m>>d;
-    vector<ll> v(n*m);
-    forn(i,n*m){
-        cin>>v[i];
+
+vector<array<int,2>> ans;
+
+void solve(int n,int org,int buff, int target){
+    if(n==1){
+        ans.pb({org,target});
+        return;
     }
-    sort(all(v));
-
-    ll acum = 0;
-    ll mid = v[v.size()/2];
-    forn(i,v.size()){
-        if(abs(v[i]-mid)%d !=0){
-            cout<<-1<<el;
-            return;
-        }
-        acum+=abs(v[i]-mid)/d;
-    }
-    cout<<acum<<el;
-
-
+    solve(n-1,org,target,buff);
+    ans.pb({org,target});
+    solve(n-1,buff,org,target);
 }
 
 int main(){
@@ -68,6 +60,11 @@ int main(){
     cout << setprecision(20)<< fixed;
     // ll t; cin>>t;
     // while(t--)
-    solve();
+    int n; cin>>n;
+    solve(n,1,2,3);
+    cout<<sz(ans)<<el;
+    forn(i,sz(ans)){
+        cout<<ans[i][0]<<" "<<ans[i][1]<<el;
+    }
     return 0;
 }

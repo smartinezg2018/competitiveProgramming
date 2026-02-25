@@ -25,13 +25,14 @@ typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
-typedef array<int,2> v2;
+typedef array<ll,2> v2;
 
 
 const int inf = 1e9;
 const int nax = 1e5+200;
 const ld pi = acos(-1);
 const ld eps= 1e-9;
+const ll mod = 1e9+7;
 
 int dr[] = {1,-1,0, 0,1,-1,-1, 1};
 int dc[] = {0, 0,1,-1,1, 1,-1,-1};
@@ -41,24 +42,6 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n,m,d;cin>>n>>m>>d;
-    vector<ll> v(n*m);
-    forn(i,n*m){
-        cin>>v[i];
-    }
-    sort(all(v));
-
-    ll acum = 0;
-    ll mid = v[v.size()/2];
-    forn(i,v.size()){
-        if(abs(v[i]-mid)%d !=0){
-            cout<<-1<<el;
-            return;
-        }
-        acum+=abs(v[i]-mid)/d;
-    }
-    cout<<acum<<el;
-
 
 }
 

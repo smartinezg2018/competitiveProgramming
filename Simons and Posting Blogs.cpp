@@ -42,17 +42,44 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    vector<string> v(10);
-    forn(i,10) cin>>v[i];
-    
-    int acum = 0;
-    forn(i,10){
-        forn(j,10){
-            if(v[i][j]=='X')
-            acum+= min({i+1,j+1,10-i,10-j});
+    int n; cin>>n;
+
+    vector<deque<ll>> v(n);
+    ll input ,m;
+    for(int i = 0; i <n;i++){
+        cin>>m;
+        while(m--){
+            cin>>input;
+            v[i].push_front(input);
         }
     }
-    cout<<acum<<el;
+
+
+    set<ll> s;
+    
+    forn(i,n){
+        sort(all(v));
+        if(v[0].front()==inf+1000) break;
+        while(!v[0].empty()){
+            if(s.find(v[0].front())!=s.end()) {v[0].pop_front();continue;}
+            cout<<v[0].front()<<" ";
+            s.insert(v[0].front());
+            v[0].pop_front();
+        }
+
+        v[0].push_front(inf+1000);
+
+        forn(j,n){
+            while(s.find(v[j].front())!=s.end()){
+                v[j].pop_front();
+            }
+            if(v[j].empty()) v[j].pb(inf+1000);
+        }
+        
+    }
+    cout<<el;
+    
+    
 
 }
 

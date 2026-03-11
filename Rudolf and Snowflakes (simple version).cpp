@@ -42,17 +42,26 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    vector<string> v(10);
-    forn(i,10) cin>>v[i];
-    
-    int acum = 0;
-    forn(i,10){
-        forn(j,10){
-            if(v[i][j]=='X')
-            acum+= min({i+1,j+1,10-i,10-j});
+    int n; cin>>n;
+
+    vll v;
+    for(int i = 2; i*i <= (n-1); i++){
+        if((n-1)%i==0) v.pb(i);
+    }
+    for(ll mult : v){
+        // d(mult);
+        ll temp = n;
+        while((temp-1)%mult == 0){
+            temp = (temp-1) / mult;
+        }
+        // cout<<temp<<el;
+        if(temp == 0){
+            cout<<"YES"<<el;
+            return;
         }
     }
-    cout<<acum<<el;
+    cout<<"NO"<<el;
+
 
 }
 

@@ -42,17 +42,6 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    vector<string> v(10);
-    forn(i,10) cin>>v[i];
-    
-    int acum = 0;
-    forn(i,10){
-        forn(j,10){
-            if(v[i][j]=='X')
-            acum+= min({i+1,j+1,10-i,10-j});
-        }
-    }
-    cout<<acum<<el;
 
 }
 
@@ -60,8 +49,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    ll t; cin>>t;
-    while(t--)
+    // ll t; cin>>t;
+    // while(t--)
     solve();
     return 0;
 }

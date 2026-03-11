@@ -42,28 +42,26 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n; cin>>n;
+
+    ll n;
+    cin>>n;
+
     vll a(n),b(n);
     forn(i,n) cin>>a[i];
     forn(i,n) cin>>b[i];
 
-    vll ao = a, bo = b;
-    sort(all(ao));
-    sort(all(bo));
-
-    vll ans;
-
-
+    ll difmx = a[0]-b[0];
+    for1(i,n-1) difmx = max(difmx,a[i]-b[i]);
+    // d(difmx);
+    ll count = 0;
     forn(i,n){
-        if(a[i]-*(lower_bound(all(ao),a[i])-1)< b[i]-bo[0])continue;
-        ans.pb(i+1);
+        if(a[i]-b[i]==difmx) count++;
     }
-    cout<<sz(ans)<<el;
-    forn(i,sz(ans)){
-        cout<<ans[i]<<" ";
+    cout<<count<<el;
+    forn(i,n){
+        if(a[i]-b[i]==difmx)cout<<i+1<<' ';
     }
     cout<<el;
-
 
 
 }

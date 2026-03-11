@@ -38,21 +38,51 @@ int dr[] = {1,-1,0, 0,1,-1,-1, 1};
 int dc[] = {0, 0,1,-1,1, 1,-1,-1};
 
 ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
-return os << "("<< pa.fi << ", " << pa.se << ")";
+    return os << "("<< pa.fi << ", " << pa.se << ")";
+}
+
+vi v(1);
+
+int rec(map<ll,vll>& m,vi& color, int index){
+    if(m[index].empty()){
+        return color[index-1];
+    }
+    int acum = color[index-1];
+    for(ll& neig : m[index]){
+       acum += rec(m,color,neig);
+    }
+    if(acum == 0) v[0]++;
+    return acum;
 }
 
 void solve(){
-    vector<string> v(10);
-    forn(i,10) cin>>v[i];
-    
-    int acum = 0;
-    forn(i,10){
-        forn(j,10){
-            if(v[i][j]=='X')
-            acum+= min({i+1,j+1,10-i,10-j});
-        }
+    v[0] = 0;
+    ll n; cin>>n;
+    vll arr(n-1);
+    forn(i,n-1){
+        cin>>arr[i];
     }
-    cout<<acum<<el;
+    string s; cin>>s;
+    map<ll,vll> m;
+    for(int i = 0; i <n-1;i++){
+        m[arr[i]].pb(i+2);
+    }
+    vi color;
+    for(int i= 0; i< sz(s);i++){
+        if(s[i]=='W')
+            color.pb(1);
+        else 
+            color.pb(-1);
+    }
+
+    rec(m,color,1);
+
+    cout<<v[0]<<el;
+    
+
+
+
+
 
 }
 

@@ -42,17 +42,39 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    vector<string> v(10);
-    forn(i,10) cin>>v[i];
-    
-    int acum = 0;
-    forn(i,10){
-        forn(j,10){
-            if(v[i][j]=='X')
-            acum+= min({i+1,j+1,10-i,10-j});
+    ll n; cin>>n;
+    vll v(n);
+    forn(i,n) cin>>v[i];
+
+    vll ans;
+    ll total = 0;
+    forn(i,n){
+        ll acum = 0;
+        if(v[i]<0){
+            while(i<n && v[i]<=0){
+                acum+=v[i];
+                total+=abs(v[i]);
+                i++;
+            }
         }
+        else{
+            while(i<n && v[i]>=0){
+                acum+=v[i];
+                total+=abs(v[i]);
+
+                i++;
+            }
+        }
+        i--;
+        ans.pb(acum);
+        // d(acum);
     }
-    cout<<acum<<el;
+
+    int l = 0; int r = sz(ans)-1;
+    while(l<sz(ans) && v[l]>=0 ) l++;
+    while(r>=0 && v[r]>=0 ) r--;
+
+    cout<<total<<" "<<max(r-l+1,0)<<el;
 
 }
 

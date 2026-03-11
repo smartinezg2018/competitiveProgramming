@@ -42,17 +42,45 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    vector<string> v(10);
-    forn(i,10) cin>>v[i];
+    ll n,x,y; cin>>n>>x>>y;
+    vll v(n);
+    forn(i,n) cin>>v[i];
     
-    int acum = 0;
-    forn(i,10){
-        forn(j,10){
-            if(v[i][j]=='X')
-            acum+= min({i+1,j+1,10-i,10-j});
-        }
+    deque<ll> mid;
+    for(ll i = x; i <y;i++){
+        mid.push_back(v[i]);
     }
-    cout<<acum<<el;
+
+    ll mn_mid = *min_element(all(mid));
+    while(mid.front()>mn_mid){
+        mid.push_back(mid.front());
+        mid.pop_front();
+    }
+
+    deque<ll> sides;
+
+    for(ll i = 0;i<x;i++){
+        sides.pb(v[i]);
+    }
+    for(ll i = y;i<n;i++){
+        sides.pb(v[i]);
+    }
+
+    while(!sides.empty() && sides.front()<mn_mid){
+        cout<<sides.front()<<" ";
+        sides.pop_front();
+    }
+
+    while(!mid.empty()){
+        cout<<mid.front()<<" ";
+        mid.pop_front();
+    }
+
+    while(!sides.empty()){
+        cout<<sides.front()<<" ";
+        sides.pop_front();
+    }
+    cout<<el;
 
 }
 

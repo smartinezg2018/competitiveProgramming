@@ -40,19 +40,61 @@ int dc[] = {0, 0,1,-1,1, 1,-1,-1};
 ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
-
-void solve(){
-    vector<string> v(10);
-    forn(i,10) cin>>v[i];
+vector<int> sieve(int n) {
     
-    int acum = 0;
-    forn(i,10){
-        forn(j,10){
-            if(v[i][j]=='X')
-            acum+= min({i+1,j+1,10-i,10-j});
+    // creation of boolean array
+    vector<bool> prime(n + 1, true);
+    for (int p = 2; p * p <= n; p++) {
+        if (prime[p] == true) {
+            
+            // marking as false
+            for (int i = p * p; i <= n; i += p)
+                prime[i] = false;
         }
     }
-    cout<<acum<<el;
+    
+    vector<int> res;
+    for (int p = 2; p <= n; p++){
+        if (prime[p]){ 
+            res.push_back(p);
+        }
+    }
+    return res;
+}
+
+void solve(){
+    ll n; cin>>n;
+    vll v(n);
+    ll mul = 1;
+    ll mx = 0;
+    forn(i,n) {cin>>v[i];mul*=v[i];mx = max(mx,v[i]);}
+
+    deque<ll> ans;
+
+
+    for(int i = 0; i <n;i++){
+        for(int j = 2;j<=v[i];j++){
+            while(v[i]>1 && v[i]%j==0){
+                // if(!ans.empty() && ans.back()==j) continue;
+                ans.emplace_back(j);
+                v[i]/=j;
+            }
+            if(v[i]>1)
+                ans.emplace_back(v[i]);
+        }
+    }
+    forn(i,sz(ans)-1){
+        // cout<<ans[i]<<" ";
+        if(v[i]>v[i+1]){
+            cout<<"Alice"<<el;
+            return;
+        }
+    }
+    // cout<<"Bob"<<el;
+
+    
+    
+    
 
 }
 

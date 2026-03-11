@@ -42,6 +42,18 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
+    // int n,x; cin>>n>>x;
+    // vector<ll> v(n), temp(n);
+    // forn(i,n){cin>>v[i]; temp[i] = (x-v[i]>0?x-v[i]:-1);};
+
+    // forn(i,n){
+    //     if(temp[i]<0) continue;
+    //     map<ll,int> m;
+
+    // }
+
+
+
 
 }
 

@@ -42,17 +42,18 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    vector<string> v(10);
-    forn(i,10) cin>>v[i];
-    
-    int acum = 0;
-    forn(i,10){
-        forn(j,10){
-            if(v[i][j]=='X')
-            acum+= min({i+1,j+1,10-i,10-j});
+    int n; cin>>n;
+    vll v(n);
+    forn(i,n) cin>>v[i];
+    ll mn = inf;
+    forn(i,n-1){
+        if(v[i+1]<v[i]){
+            cout<<0<<el;
+            return;
         }
+        mn = min(v[i+1]-v[i]+1,mn);
     }
-    cout<<acum<<el;
+    cout<<(mn+1)/2<<el;
 
 }
 

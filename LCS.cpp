@@ -41,37 +41,62 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+int lcs(vector<ll> &s1, vector<ll> &s2, int n, int m) {
+    if(n == 0 || m == 0)
+        return 0;
+    if(s1[n] == s2[m])
+        return 1 + lcs(s1,s2,n-1,m-1);
+    return max(lcs(s1,s2,n,m-1),lcs(s1,s2,n-1,m));
+}
+
+int lcsRec(string &s1, string &s2, int m, int n, vector<vector<int>> &memo) {
+    if (m == 0 || n == 0)
+        return 0;
+    if (memo[m][n] != -1)
+        return memo[m][n];
+    if (s1[m - 1] == s2[n - 1])
+        return memo[m][n] = 1 + lcsRec(s1, s2, m - 1, n - 1, memo);
+    return memo[m][n] = max(lcsRec(s1, s2, m, n - 1, memo), lcsRec(s1, s2, m - 1, n, memo));
+}
+
 void solve(){
-    string a,b; cin>>a>>b;
-    int n = sz(a), m = sz(b);
+    int n,m; cin>>n>>m;
+    vll a(n),b(m);
+    forn(i,n) cin>>a[i];
+    forn(i,m) cin>>b[i];
 
-    vector<vector<int>> v(n,vector<int> (m));
-    bool flag = false;
-    forn(i,m){
-        if(a[0] == b[i]) flag = true;
-        if(flag) v[0][i] = 1;
-        else v[0][i] = 0;
+    vector<vector<ll>> dp(n+1,vector<ll>(m+1));
+    for(int i = 1; i<=n;i++){
+        for(int j = 1 ; j<=m;j++){
+            dp[i][j] = max({dp[i-1][j-1]+(a[i-1]==b[j-1]?1:0),dp[i-1][j],dp[i][j-1]});
+        }
     }
+    cout<<dp[n][m]<<el;
+
+    int i = n, j = m;
+    vll ans;
+
+    while (i > 0 && j > 0) {
+        if (a[i-1] == b[j-1]) {
+            ans.push_back(a[i-1]);
+            i--;
+            j--;
+        }
+        else if (dp[i-1][j] > dp[i][j-1]) {
+            i--;
+        }
+        else {
+            j--;
+        }
+    }
+
+    reverse(all(ans));
+
+    forn(i,sz(ans)) cout<<ans[i]<<" ";
+    cout<<el;
+
+
     
-    string s = "";
-    for(int i = 1;i < n;i++){
-        for(int j = 1;j < m;j++){
-            if(a[i]==b[j]) v[i][j]++;
-            v[i][j] = max(v[i-1][j-1]+v[i][j],v[i][j-1]);
-            v[i][j] = max(v[i][j],v[i-1][j]);
-            if(v[i][j]==v[i-1][j-1]+1 && a[i]==b[j]) s +=a[i];
-        }
-    }
-
-    for1(i,n-1){
-        for1(j,m-1){
-            cout<<v[i][j]<<" ";
-        }
-        cout<<el;
-    }
-
-    cout<<v[n-1][m-1];
-
 
 }
 
@@ -84,3 +109,4 @@ int main(){
     solve();
     return 0;
 }
+

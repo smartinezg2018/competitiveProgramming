@@ -41,22 +41,29 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-void solve(){
-    int n; cin>>n;
-    string s; cin>>s;
-    int x = 0,y = 0;
-    for(char c:s){
-        if(c=='U') y++;
-        else if(c == 'D') y--;
-        else if(c == 'R') x++;
-        else x--;
-        if(x==1 && y == 1){
-            cout<<"YES"<<el;
-            return;
-        }
-    }
-    cout<<"NO"<<el;
+ll gauss(ll n){
+    return (n*(n+1)/2);
+}
 
+ll calc(ll messages,ll k){
+    if(messages<= k){
+        return gauss(messages);
+    }
+    return (gauss(k)*2-k) - gauss(((k*2)-1)-messages);
+    
+}
+
+void solve(){
+    ll x,k; cin>>k>>x;
+    
+    ll l = 0, r = (k*2)-1;
+
+    while(l<r){
+        ll mid = (l+r)/2;
+        if(calc(mid,k)>=x) r = mid;
+        else  l = mid+1;
+    }
+    cout<<l<<el;
 }
 
 int main(){

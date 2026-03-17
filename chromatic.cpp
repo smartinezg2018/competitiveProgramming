@@ -11,7 +11,7 @@ int inf  = 1e9;
 void solve(){
 	int n; cin>>n;
 	priority_queue<ll> b;
-	priority_queue<ll> r;
+	priority_queue<long long> r;
 	for(int i = 0; i<n;i++){
 		ll a; cin>>a;
 		b.push(a);

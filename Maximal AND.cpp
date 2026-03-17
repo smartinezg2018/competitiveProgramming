@@ -42,20 +42,26 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    int n; cin>>n;
-    string s; cin>>s;
-    int x = 0,y = 0;
-    for(char c:s){
-        if(c=='U') y++;
-        else if(c == 'D') y--;
-        else if(c == 'R') x++;
-        else x--;
-        if(x==1 && y == 1){
-            cout<<"YES"<<el;
-            return;
+    ll n,k; cin>>n>>k;
+    vll v(n);
+    forn(i,n) cin>>v[i];
+
+    vll bits(31,n);
+    forn(i,n){
+        forn(j,31){
+            if(v[i]==0) break;
+            if(v[i]%2==1) bits[j]--;
+            v[i]/=2;
         }
     }
-    cout<<"NO"<<el;
+    ll total = 0;
+    for(int i = 30;i>=0;i--){
+        total += (1<<i) * (k>=bits[i] || bits[i] == 0);
+        if(k>=bits[i]) k-=bits[i];
+    }
+    cout<<total<<el;
+
+
 
 }
 

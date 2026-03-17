@@ -41,23 +41,63 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+
+void to_bit(vector<ll> &v, vector<vll> &pre){
+    forn(j,sz(v)){
+        forn(i,30){
+            if(v[j]%2!=0)pre[i][j] = 1;
+            else pre[i][j] = 0;
+            v[j]/=2;
+        }
+    }
+
+    forn(i,30){
+        partial_sum(pre[i].begin(),pre[i].end(),pre[i].begin());
+    }
+
+}
+
+ll binary(ll l, ll r,vector<vll> &pre){
+    ll acum = 0;
+     
+    forn(i,30){
+        if(r-l+1 == (pre[i][r] - (l==0? 0 :pre[i][l-1]))) acum+=(1<<i);
+    }
+    
+    return acum;
+}
+
 void solve(){
     ll n; cin>>n;
-    vll v(n*(n-1)/2);
-    map<ll,ll> mp;
-    forn(i,n*(n-1)/2) cin>>v[i];
-    sort(all(v));
-    int temp = n;
-    for(int i = 0; i<sz(v);i+=temp){
-        cout<<v[i]<<" ";
-        temp--;
+    vll arr(n);
+    forn(i,n) cin>>arr[i];
+    vector<vll> pre(30,vll(n));
+    to_bit(arr,pre);
+
+    ll qs; cin>>qs;
+    forn(i,qs){
+        ll l,k; cin>>l>>k;
+        l--;
+        ll base = l;
+        ll r = n-1;
+        
+        if(binary(base,base,pre)<k){
+            cout<<-1<<' ';
+            continue;
+        }
+        
+        while(l<=r){
+            ll mid = (l+r)/2;
+            if(binary(base,mid,pre)>=k){
+                l = mid + 1;
+            }
+            else{
+                r = mid-1;
+            }
+        }
+        cout<<r+1<<' ';
     }
-    cout<<v[sz(v)-1]<<" ";
     cout<<el;
-
-
-
-
 
 }
 

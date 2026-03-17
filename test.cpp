@@ -42,15 +42,7 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-        ll base = 10;
-        ll temp = 10;
-        for(int j = 2;j*j<=temp;j++){
-            while(base>0 && base%j==0){
-                base/=j;
-                cout<<j<<el;
-                cout<<base/j<<el;
-            }
-        }
+
 }
 
 int main(){

@@ -43,20 +43,15 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 
 void solve(){
     ll n; cin>>n;
-    vll v(n*(n-1)/2);
-    map<ll,ll> mp;
-    forn(i,n*(n-1)/2) cin>>v[i];
-    sort(all(v));
-    int temp = n;
-    for(int i = 0; i<sz(v);i+=temp){
-        cout<<v[i]<<" ";
-        temp--;
+    deque<char> q;
+    string s;
+    cin>>s;
+    ll l = 0,r = n-1;
+    while(s[l]!=s[r] && r>l){
+        r--;
+        l++;
     }
-    cout<<v[sz(v)-1]<<" ";
-    cout<<el;
-
-
-
+    cout<<max((ll)0,r-l+1)<<el;
 
 
 }

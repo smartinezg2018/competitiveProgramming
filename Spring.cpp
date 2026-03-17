@@ -42,21 +42,29 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n; cin>>n;
-    vll v(n*(n-1)/2);
-    map<ll,ll> mp;
-    forn(i,n*(n-1)/2) cin>>v[i];
-    sort(all(v));
-    int temp = n;
-    for(int i = 0; i<sz(v);i+=temp){
-        cout<<v[i]<<" ";
-        temp--;
-    }
-    cout<<v[sz(v)-1]<<" ";
+    ll a,b,c,m; cin>>a>>b>>c>>m;
+
+    vll v(3);
+
+    v[0] = (m/a)*6;
+    v[1] = (m/b)*6;
+    v[2] = (m/c)*6;
+
+    v[0] -= (m/(lcm(a,b)))*3;
+    v[0] -= (m/(lcm(a,c)))*3;
+    v[0] += (m/lcm(lcm(b,c),a))*2;
+
+    v[1] -= (m/(lcm(a,b)))*3;
+    v[1] -= (m/(lcm(b,c)))*3;
+    v[1] += (m/lcm(lcm(b,c),a))*2;
+
+    v[2] -= (m/(lcm(c,b)))*3;
+    v[2] -= (m/(lcm(a,c)))*3;
+    v[2] += (m/lcm(lcm(b,c),a))*2;
+
+
+    forn(i,3) cout<<v[i]<<" ";
     cout<<el;
-
-
-
 
 
 }

@@ -44,36 +44,34 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 void solve(){
     int n; cin>>n;
 
-    vector<deque<ll>> v(n);
+    deque<deque<ll>> v;
     ll input ,m;
     for(int i = 0; i <n;i++){
         cin>>m;
+        v.pb({});
         while(m--){
             cin>>input;
             v[i].push_front(input);
         }
     }
 
-
     set<ll> s;
+    vll ans;
     
     forn(i,n){
         sort(all(v));
-        if(v[0].front()==inf+1000) break;
-        while(!v[0].empty()){
-            if(s.find(v[0].front())!=s.end()) {v[0].pop_front();continue;}
-            cout<<v[0].front()<<" ";
-            s.insert(v[0].front());
-            v[0].pop_front();
+        // reverse(all(v));
+
+        while(!v.front().empty()){
+            if(s.find(v.front().front())==s.end())
+                cout<<(v.front().front())<<' ';
+            s.insert(v.front().front());
+            v.front().pop_front();
         }
+        v.pop_front();
 
-        v[0].push_front(inf+1000);
-
-        forn(j,n){
-            while(s.find(v[j].front())!=s.end()){
-                v[j].pop_front();
-            }
-            if(v[j].empty()) v[j].pb(inf+1000);
+        for(auto& elem : v){
+            while(s.find(elem.front())!=s.end()) elem.pop_front();
         }
         
     }

@@ -43,20 +43,21 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 
 void solve(){
     ll n; cin>>n;
-    vll v(n*(n-1)/2);
     map<ll,ll> mp;
-    forn(i,n*(n-1)/2) cin>>v[i];
-    sort(all(v));
-    int temp = n;
-    for(int i = 0; i<sz(v);i+=temp){
-        cout<<v[i]<<" ";
-        temp--;
+    forn(i,n*n){
+        ll temp; cin>>temp;
+        mp[temp]++;
     }
-    cout<<v[sz(v)-1]<<" ";
-    cout<<el;
 
-
-
+    for(auto &[key,item]:mp){
+        // d(item);
+        // d(((n-1)*(n-1))+1);
+        if(item> n*(n-1)){
+            cout<<"NO"<<el;
+            return;
+        }
+    }
+    cout<<"YES"<<el;
 
 
 }

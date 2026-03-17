@@ -43,20 +43,14 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 
 void solve(){
     ll n; cin>>n;
-    vll v(n*(n-1)/2);
-    map<ll,ll> mp;
-    forn(i,n*(n-1)/2) cin>>v[i];
-    sort(all(v));
-    int temp = n;
-    for(int i = 0; i<sz(v);i+=temp){
-        cout<<v[i]<<" ";
-        temp--;
+    string s;cin>>s;
+
+    forn(i,n){
+        if(s[i]=='L'){
+            cout<<i+1<<el;
+            return;
+        }
     }
-    cout<<v[sz(v)-1]<<" ";
-    cout<<el;
-
-
-
 
 
 }

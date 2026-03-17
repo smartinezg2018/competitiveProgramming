@@ -42,22 +42,19 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n; cin>>n;
-    vll v(n*(n-1)/2);
-    map<ll,ll> mp;
-    forn(i,n*(n-1)/2) cin>>v[i];
-    sort(all(v));
-    int temp = n;
-    for(int i = 0; i<sz(v);i+=temp){
-        cout<<v[i]<<" ";
-        temp--;
+    int n; cin>>n;
+    string s; cin>>s;
+    reverse(all(s));
+    for(int i = 0; i<(n%2==0?n-1:n-2);i++){
+        if(s[i]=='?' || s[i+1]=='?') continue;
+        if(s[i]==s[i+1]){
+            cout<<"NO"<<el;
+            return;
+        }
     }
-    cout<<v[sz(v)-1]<<" ";
-    cout<<el;
+    cout<<"YES"<<el;
 
-
-
-
+    
 
 }
 

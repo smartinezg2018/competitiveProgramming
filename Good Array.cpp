@@ -43,21 +43,22 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 
 void solve(){
     ll n; cin>>n;
-    vll v(n*(n-1)/2);
-    map<ll,ll> mp;
-    forn(i,n*(n-1)/2) cin>>v[i];
-    sort(all(v));
-    int temp = n;
-    for(int i = 0; i<sz(v);i+=temp){
-        cout<<v[i]<<" ";
-        temp--;
+    ll total = 0;
+    map<ll,ll> m;
+    vll v(n); forn(i,n){ cin>>v[i];total+=v[i];m[v[i]]++;}
+    vll ans;
+    forn(i,n){
+        if((total-v[i])%2!=0) continue;
+        if((m[(total-v[i])/2] == 1 && v[i]!=(total-v[i])/2) || (m[(total-v[i])/2] > 1)){
+            ans.pb(i+1);
+        }
+        
     }
-    cout<<v[sz(v)-1]<<" ";
+    cout<<sz(ans)<<el;
+    forn(i,sz(ans)){
+        cout<<ans[i]<<" ";
+    }
     cout<<el;
-
-
-
-
 
 }
 
@@ -65,8 +66,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    ll t; cin>>t;
-    while(t--)
+    // ll t; cin>>t;
+    // while(t--)
     solve();
     return 0;
 }

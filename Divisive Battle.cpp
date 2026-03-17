@@ -27,9 +27,8 @@ typedef vector<ll> vll;
 typedef vector<ld> vd;
 typedef array<ll,2> v2;
 
-
 const int inf = 1e9;
-const int nax = 1e5+200;
+// const int nax = 1e5+200;
 const ld pi = acos(-1);
 const ld eps= 1e-9;
 const ll mod = 1e9+7;
@@ -41,23 +40,47 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+set<ll> primes(ll n){
+    set<ll> s;
+    while(n%2==0){
+        s.emplace(2);
+        n/=2;
+    }
+    for(int i = 3;i*i<=n;i++){
+        while(n%i==0){
+            n/=i;
+            s.insert(i);
+        }
+    }
+    if(n>1) s.insert(n);
+    return s;
+
+}
+
 void solve(){
     ll n; cin>>n;
-    vll v(n*(n-1)/2);
-    map<ll,ll> mp;
-    forn(i,n*(n-1)/2) cin>>v[i];
-    sort(all(v));
-    int temp = n;
-    for(int i = 0; i<sz(v);i+=temp){
-        cout<<v[i]<<" ";
-        temp--;
+    vll v(n);
+    forn(i,n) cin>>v[i];
+
+    if(is_sorted(all(v))){
+        cout<<"Bob"<<el;
+        return;
     }
-    cout<<v[sz(v)-1]<<" ";
-    cout<<el;
 
-
-
-
+    vll b(n);
+    forn(i,n){
+        set<ll> k = primes(v[i]);
+        if(sz(k)>=2){
+            cout<<"Alice"<<el;
+            return;
+        }
+        b[i] = *k.begin();   
+    }
+    if(is_sorted(all(b))){
+        cout<<"Bob"<<el;
+        return;
+    }
+    cout<<"Alice"<<el;
 
 }
 

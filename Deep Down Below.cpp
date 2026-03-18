@@ -41,33 +41,41 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-ll gauss(ll n){
-     return n*(n+1)/2;
-}
 void solve(){
-    int n; cin>>n;
-    vll v((n*2)); 
-    forn(i,n){
-        cin>>v[i];
-        v[i+n] = v[i];
+    ll nc; cin>>nc;
+    vector<vll> v(nc);
+    vector<v2> ans(nc);
+
+    forn(i,nc){
+        ll nm; cin>>nm;
+        ll mx = 0;
+        forn(j,nm){
+            ll temp; 
+            cin>>temp;
+            temp -= j;
+            mx = max(mx,temp);
+        }
+        ans[i] = {mx,nm};
     }
-    map<ll,ll> mp;
-    forn(i,n){
-        mp[i+v[i]]++;
-    } 
-    ll acum = n;
-    for(auto &[key,item]: mp){
-        if(item>1) acum += gauss(item-1)*2;
-    } 
-    for(int i = n;i<(2*n);i++){
-        acum += mp[v[i]+i]*2;
+    sort(all(ans));
+    vll f(nc);
+    ll acum = 0;
+    forn(i,nc){
+        f[i] = max(ans[i][0] - acum,(ll)0);
+        acum+=ans[i][1];
     }
-    cout<<acum<<el;
+    cout<<*max_element(all(f))+1<<el;
+
+
+
 }
- 
+
 int main(){
-	// int t; cin>>t;
-	// while(t--) 
-	solve();
-	return 0;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    cout << setprecision(20)<< fixed;
+    ll t; cin>>t;
+    while(t--)
+    solve();
+    return 0;
 }

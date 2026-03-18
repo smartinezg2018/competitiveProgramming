@@ -8,13 +8,8 @@ public:
             
         }
 
-        int l =0,r = m.size()-1;
-        while(l<=r){
-            if(m[l]!=m[r]) return false;
-            l++;
-            r--;
-        }
-        return true;
+        reverse(m.begin(),m.end());
+        return m == s;
         
     }
 };

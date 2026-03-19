@@ -42,21 +42,9 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n; cin>>n;
-    vll v(n);
-    forn(i,n) cin>>v[i];
-    // vector<long long>
-
-    // cout<<*max_element(v.begin()+1,v.end())<<el;
-    forn(i,n){  
-            if(v[i]!=n-i){
-            reverse(v.begin()+i ,max_element(v.begin()+i,v.end())+1);
-                break;
-        }
-    }
-    forn(i,n) cout<<v[i]<<' ';
-    cout<<el;
-
+    ll n,a,b;
+    cin>>n>>a>>b;
+    cout<<(n-2>=a+b || (n ==a & n == b)? "YES" : "NO")<<el;;
 
 }
 

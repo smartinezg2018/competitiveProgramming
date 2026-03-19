@@ -41,33 +41,38 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-ll gauss(ll n){
-     return n*(n+1)/2;
-}
+
 void solve(){
     int n; cin>>n;
-    vll v((n*2)); 
-    forn(i,n){
-        cin>>v[i];
-        v[i+n] = v[i];
+    string s;
+    cin>>s;
+    
+    s = "0" + s + "0";
+
+    ll total = 0;
+
+    forn(i,sz(s)){
+        if(s[i] == '1') total++;
     }
-    map<ll,ll> mp;
-    forn(i,n){
-        mp[i+v[i]]++;
-    } 
-    ll acum = n;
-    for(auto &[key,item]: mp){
-        if(item>1) acum += gauss(item-1)*2;
-    } 
-    for(int i = n;i<(2*n);i++){
-        acum += mp[v[i]+i]*2;
+
+    for(int i = 0; i < sz(s); i++){
+        int j = i;
+        while(j<sz(s) && s[j] == '0'){
+            j++;
+        }
+        total += (j-i)/3;
+        i = j;
     }
-    cout<<acum<<el;
+    cout<<total<<el;
+    
 }
- 
+
 int main(){
-	// int t; cin>>t;
-	// while(t--) 
-	solve();
-	return 0;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL); cout.tie(NULL);
+    cout << setprecision(20)<< fixed;
+    ll t; cin>>t;
+    while(t--)
+    solve();
+    return 0;
 }

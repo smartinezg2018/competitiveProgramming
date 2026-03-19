@@ -26,12 +26,7 @@ void solve(){
 			m[i+v[i]]++;
 		
 	}
-		
-	
 	cout<<count<<endl;
-
-	
-	
 }
  
 int main(){

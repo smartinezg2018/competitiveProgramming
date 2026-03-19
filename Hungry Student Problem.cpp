@@ -41,23 +41,10 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+vector<bool> dp(101);
 void solve(){
-    ll n; cin>>n;
-    vll v(n);
-    forn(i,n) cin>>v[i];
-    // vector<long long>
-
-    // cout<<*max_element(v.begin()+1,v.end())<<el;
-    forn(i,n){  
-            if(v[i]!=n-i){
-            reverse(v.begin()+i ,max_element(v.begin()+i,v.end())+1);
-                break;
-        }
-    }
-    forn(i,n) cout<<v[i]<<' ';
-    cout<<el;
-
-
+    int n; cin>>n;
+    cout<<(dp[n]? "YES":"NO")<<el;
 }
 
 int main(){
@@ -65,6 +52,12 @@ int main(){
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
     ll t; cin>>t;
+    dp[0] = true;
+    dp[3] = true;
+    dp[6] = true;
+    for(int i = 7;i<=100;i++){
+        if(dp[i-3] || dp[i-7]) dp[i] = true;
+    }
     while(t--)
     solve();
     return 0;

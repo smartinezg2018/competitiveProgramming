@@ -6,7 +6,6 @@
 using namespace std;
 
 int main() {
-    cout << "New problem name: ";
     string new_problem;
     getline(cin, new_problem);
 
@@ -20,8 +19,7 @@ int main() {
 
     input.close();
     output.close();
-
-    cout << "Created " << new_problem << ".cpp successfully.\n";
+    
     string command = "code \"" + new_problem + ".cpp\"";
     system(command.c_str());
     return 0;

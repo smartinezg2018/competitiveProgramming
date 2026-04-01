@@ -1,5 +1,6 @@
-#include <bits/stdc++.h>
 
+#include <bits/stdc++.h>
+ 
 #define fi first
 #define se second
 #define forn(i,n) for(int i=0; i< (int)n; ++i)
@@ -13,9 +14,9 @@
 #define ri(n) scanf("%d",&n)
 #define sz(v) int(v.size())
 #define all(v) v.begin(),v.end()
-
+ 
 using namespace std;
-
+ 
 typedef long long ll;
 typedef double ld;
 typedef pair<int,int> ii;
@@ -26,39 +27,85 @@ typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
 typedef array<ll,2> v2;
-
-
+ 
+ 
 const int inf = 1e9;
 const int nax = 1e5+200;
 const ld pi = acos(-1);
 const ld eps= 1e-9;
 const ll mod = 1e9+7;
-
+ 
 int dr[] = {1,-1,0, 0,1,-1,-1, 1};
 int dc[] = {0, 0,1,-1,1, 1,-1,-1};
-
+ 
 ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
-
-
-void solve(){
-    ll n; cin>>n;
-    vector<array<ll,3>> v(n), ans(n);
-    forn(i,n)
-    cin>>v[i][0]>>v[i][1]>>v[i][2];
-
-    ans[0][0] = v[0][0];
-    ans[0][1] = v[0][1];
-    ans[0][2] = v[0][2];
-
-    forn(i,n-1){
-        forn(j,3)
-            ans[i+1][j] = v[i+1][j] + max(ans[i][(j+1)%3],ans[i][(j+2)%3]);
+ 
+ 
+void print(vll &m,ll base){
+    vll ans;
+    ans.pb(base);
+    while(base!=1){
+        ans.pb(m[base]);
+        base =  m[base];
     }
-    cout<<*max_element(all(ans[n-1]))<<el;
+ 
+    ll n = sz(ans);
+    cout<<n<<el;
+    forn(i,n){
+        cout<<ans[n-1-i]<<" ";
+    }
+    cout<<el;
+ 
 }
+ 
+void solve(){
+    ll n,queries; cin>>n>>queries;
+    map<ll,vector<ll>> mp;
+    forn(i,queries){
+        ll o,d; cin>>o>>d;
+        mp[o].pb(d);
+        mp[d].pb(o);
+    }
+    vector<bool> visited(n+1,false);
+ 
 
+    queue<ll> q;
+    q.push(1); 
+    vector<ll> route(n+1,-1);
+
+    ll count = 0;
+ 
+    while(!q.empty()){
+        count++;
+        ll k = q.size();
+        forn(j,k){
+            ll v = q.front();
+            q.pop();
+            if(visited[v]) continue;
+            
+            for(ll neigh:mp[v]){
+                if(visited[neigh]) 
+                    continue;
+                if(route[neigh] == -1)
+                    route[neigh] = v;
+                if(neigh == n){
+                    print(route,n);
+                    return;
+                }
+                q.push(neigh);
+            }
+            visited[v] = true;
+            
+        }
+ 
+    }
+ 
+    cout<<"IMPOSSIBLE"<<el;
+    
+}
+ 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);

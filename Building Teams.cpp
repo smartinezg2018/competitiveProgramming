@@ -41,22 +41,58 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-
 void solve(){
-    ll n; cin>>n;
-    vector<array<ll,3>> v(n), ans(n);
-    forn(i,n)
-    cin>>v[i][0]>>v[i][1]>>v[i][2];
-
-    ans[0][0] = v[0][0];
-    ans[0][1] = v[0][1];
-    ans[0][2] = v[0][2];
-
-    forn(i,n-1){
-        forn(j,3)
-            ans[i+1][j] = v[i+1][j] + max(ans[i][(j+1)%3],ans[i][(j+2)%3]);
+    ll n,queries; cin>>n>>queries;
+    map<ll,vector<ll>> mp;
+    forn(i,queries){
+        ll o,d; cin>>o>>d;
+        mp[o].pb(d);
+        mp[d].pb(o);
     }
-    cout<<*max_element(all(ans[n-1]))<<el;
+    vector<ll> team(n+1,-1);
+
+    queue<ll> total;
+    forn(i,n)
+        total.push(i+1);
+
+    while(!total.empty()){
+
+        while(team[total.front()] != -1) total.pop();
+
+        queue<ll> q;
+        q.push(total.front());
+        ll level = false;
+        while(!q.empty()){
+            ll k = q.size();
+            forn(i,k){
+                if(team[q.front()] != -1){
+                    if(team[q.front()] != level){
+                        cout<<"IMPOSSIBLE"<<el;
+                        return;
+                    }
+                    else{
+                        q.pop();
+                        continue;
+                    }
+                }
+
+                team[q.front()] = level;
+                
+                for(ll neigh:mp[q.front()]){
+                    q.push(neigh);
+                }
+                    
+                
+                q.pop();
+            }
+            level ^= 1;
+        }
+        
+    }
+    forn(i,n){
+        cout<<team[i+1]+1<<" ";
+    }
+    
 }
 
 int main(){

@@ -41,22 +41,44 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-
 void solve(){
-    ll n; cin>>n;
-    vector<array<ll,3>> v(n), ans(n);
-    forn(i,n)
-    cin>>v[i][0]>>v[i][1]>>v[i][2];
-
-    ans[0][0] = v[0][0];
-    ans[0][1] = v[0][1];
-    ans[0][2] = v[0][2];
-
-    forn(i,n-1){
-        forn(j,3)
-            ans[i+1][j] = v[i+1][j] + max(ans[i][(j+1)%3],ans[i][(j+2)%3]);
+    ll n,queries; cin>>n>>queries;
+    map<ll,vector<ll>> mp;
+    forn(i,queries){
+        ll o,d; cin>>o>>d;
+        mp[o].pb(d);
+        mp[d].pb(o);
     }
-    cout<<*max_element(all(ans[n-1]))<<el;
+    vector<bool> visited(n+1,0);
+    queue<ll> total;
+    forn(i,n)
+        total.push(i+1);
+    
+
+    vll ans;
+    ll count = 0;
+    while(!total.empty()){
+        count++;
+        queue<ll> q;
+        ans.pb(total.front());
+        q.push(total.front());
+        while(!q.empty()){
+            for(ll neigh:mp[q.front()]){
+                if(visited[neigh]) 
+                    continue;
+                q.push(neigh);
+            }
+            visited[q.front()] = true;
+            q.pop();
+        }
+        while(visited[total.front()]) total.pop();
+        
+    }
+    cout<<ans.size()-1<<el;
+    forn(i,ans.size()-1){
+        cout<<ans[i]<<" "<<ans[i+1]<<el;
+    }
+    
 }
 
 int main(){

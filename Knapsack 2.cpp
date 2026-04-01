@@ -41,22 +41,23 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-
 void solve(){
-    ll n; cin>>n;
-    vector<array<ll,3>> v(n), ans(n);
-    forn(i,n)
-    cin>>v[i][0]>>v[i][1]>>v[i][2];
+    ll n,k; cin>>n>>k;
+    vector<ll> v(n);
+    forn(i,n) cin>>v[i];
 
-    ans[0][0] = v[0][0];
-    ans[0][1] = v[0][1];
-    ans[0][2] = v[0][2];
-
-    forn(i,n-1){
-        forn(j,3)
-            ans[i+1][j] = v[i+1][j] + max(ans[i][(j+1)%3],ans[i][(j+2)%3]);
+    vll ans(n);
+    forn(i,n){
+        ll mn = 1e18;
+        forn(j,k){
+            if(i-j-1<0) break;
+            mn = min(mn,ans[i-j-1]+abs(v[i]-v[i-j-1]));  
+        }
+        // d(mn);
+        ans[i] = mn;
     }
-    cout<<*max_element(all(ans[n-1]))<<el;
+    cout<<ans[n-1]<<el;
+
 }
 
 int main(){

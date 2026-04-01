@@ -37,26 +37,45 @@ const ll mod = 1e9+7;
 int dr[] = {1,-1,0, 0,1,-1,-1, 1};
 int dc[] = {0, 0,1,-1,1, 1,-1,-1};
 
+
+
+
 ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+void dfs(vector<string> &v,ll y , ll x){
+    if(v[y][x] == '.'){
+        v[y][x] = '#';
+    }
+    else{
+        return;
+    }
+    if(y<sz(v)-1) dfs(v,y+1,x);
+    if(y>0) dfs(v,y-1,x);
+    if(x<sz(v[0])-1) dfs(v,y,x+1);
+    if(x>0) dfs(v,y,x-1);
+}
 
 void solve(){
-    ll n; cin>>n;
-    vector<array<ll,3>> v(n), ans(n);
+    ll n,m; cin>>n>>m;
+
+    vector<string> v(n);
     forn(i,n)
-    cin>>v[i][0]>>v[i][1]>>v[i][2];
+        cin>>v[i];
 
-    ans[0][0] = v[0][0];
-    ans[0][1] = v[0][1];
-    ans[0][2] = v[0][2];
-
-    forn(i,n-1){
-        forn(j,3)
-            ans[i+1][j] = v[i+1][j] + max(ans[i][(j+1)%3],ans[i][(j+2)%3]);
+    ll count = 0;
+    forn(i,n){
+        forn(j,m){
+            if(v[i][j] == '.'){
+                count++;
+                dfs(v,i,j);
+            }
+        }
     }
-    cout<<*max_element(all(ans[n-1]))<<el;
+    cout<<count<<el;
+    
+
 }
 
 int main(){

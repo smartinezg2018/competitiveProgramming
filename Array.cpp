@@ -41,30 +41,36 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-
 void solve(){
     ll n; cin>>n;
-    vector<array<ll,3>> v(n), ans(n);
-    forn(i,n)
-    cin>>v[i][0]>>v[i][1]>>v[i][2];
+    vll v(n);
+    forn(i,n) cin>>v[i];
 
-    ans[0][0] = v[0][0];
-    ans[0][1] = v[0][1];
-    ans[0][2] = v[0][2];
+    reverse(all(v));
+    multiset<ll> s;
+    // s.insert();
+    vll ans(n);
+    forn(i,n){
+        auto itu = s.upper_bound(v[i]);
+        auto itl = s.lower_bound(v[i]);
+        
+        // d(distance(s.begin(),itu));
+        ans [i] = (ll) max(distance(s.begin(),itl),distance(itu,s.end()));
+        s.insert(v[i]);
 
-    forn(i,n-1){
-        forn(j,3)
-            ans[i+1][j] = v[i+1][j] + max(ans[i][(j+1)%3],ans[i][(j+2)%3]);
     }
-    cout<<*max_element(all(ans[n-1]))<<el;
+    reverse(all(ans));
+    forn(i,n) cout<<ans[i]<<" ";
+    cout<<el;
+
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

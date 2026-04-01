@@ -41,22 +41,46 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-
 void solve(){
-    ll n; cin>>n;
-    vector<array<ll,3>> v(n), ans(n);
-    forn(i,n)
-    cin>>v[i][0]>>v[i][1]>>v[i][2];
 
-    ans[0][0] = v[0][0];
-    ans[0][1] = v[0][1];
-    ans[0][2] = v[0][2];
-
-    forn(i,n-1){
-        forn(j,3)
-            ans[i+1][j] = v[i+1][j] + max(ans[i][(j+1)%3],ans[i][(j+2)%3]);
+    ll n,ques; cin>>n>>ques;
+    vector<bool> leaves(n+1,true),visited(n+1,false);
+    map<ll,vector<ll>> mp;
+    forn(i,ques){
+        ll a,b; cin>>a>>b;
+        leaves[a] = false;
+        mp[b].pb(a);
     }
-    cout<<*max_element(all(ans[n-1]))<<el;
+
+    vll ans;
+    queue<ll> q;
+
+    for(int i = 1;i<=n;i++)
+        if(leaves[i]) q.push(i);
+
+    while(!q.empty()){
+        ll a = q.front();
+        q.pop();
+        visited[a] = true;
+        ans.pb(a);
+        for(ll neigh : mp[a]){
+            if(visited[neigh]) continue;
+            q.push(neigh);
+            visited[neigh] = true;
+        }
+    }
+    reverse(all(ans));
+    
+
+    if(sz(ans)<n){
+        cout<<"IMPOSSIBLE"<<el;
+        return;
+    }
+
+    forn(i,sz(ans)) cout<<ans[i]<<" ";
+    cout<<el;
+
+
 }
 
 int main(){

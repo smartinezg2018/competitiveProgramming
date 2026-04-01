@@ -41,30 +41,35 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-
 void solve(){
-    ll n; cin>>n;
-    vector<array<ll,3>> v(n), ans(n);
-    forn(i,n)
-    cin>>v[i][0]>>v[i][1]>>v[i][2];
+    ll n,c,k; cin>>n>>c>>k;
+    vll v(n);
+    forn(i,n) cin>>v[i];
 
-    ans[0][0] = v[0][0];
-    ans[0][1] = v[0][1];
-    ans[0][2] = v[0][2];
+    sort(all(v));
 
-    forn(i,n-1){
-        forn(j,3)
-            ans[i+1][j] = v[i+1][j] + max(ans[i][(j+1)%3],ans[i][(j+2)%3]);
+    ll power = c;
+    forn(i,n){
+        if(v[i]>power) break;
+        // d(power);
+        ll temp = (v[i] + min(k,power-v[i]));
+        k = max(k - (power-v[i]),(ll)0);
+        power += temp;
     }
-    cout<<*max_element(all(ans[n-1]))<<el;
+    cout<<power<<el;
+
+
+
+
+
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

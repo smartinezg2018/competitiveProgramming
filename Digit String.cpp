@@ -13,6 +13,7 @@
 #define ri(n) scanf("%d",&n)
 #define sz(v) int(v.size())
 #define all(v) v.begin(),v.end()
+#define print(x) cout<<" " << x<<el
 
 using namespace std;
 
@@ -37,23 +38,47 @@ const ll mod = 1e9+7;
 int dr[] = {1,-1,0, 0,1,-1,-1, 1};
 int dc[] = {0, 0,1,-1,1, 1,-1,-1};
 
-ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
+ostream& operator<<(ostream& os, const ii& pa) {
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+ll gauss(ll n){
+	return n*(n+1)/2;
+}
 void solve(){
-    ll n; cin>>n;
-    deque<char> q;
-    string s;
-    cin>>s;
-    ll l = 0,r = n-1;
-    while(s[l]!=s[r] && r>l){
-        r--;
-        l++;
+    string v; cin>>v;
+    int n = sz(v);
+
+    ll pre = 0, suf = 0;
+
+    ll ans = inf;
+
+    ll four = 0;
+    forn(i,n)
+        if(v[i] =='4') four++;
+
+    for(int i = 0;i<n;i++){
+        if(v[i] == '1' || v[i] == '3'){
+            pre++;
+        }
     }
-    cout<<max((ll)0,r-l+1)<<el;
+    for(int i = 0;i<n;i++){
+        ans = min(ans,pre+suf);
+        if(v[n-i-1] == '2'){
+            suf++;
+        }
+        else if(v[n-i-1] == '1' || v[n-i-1] == '3'){
+            pre--;
+        }
+        
+    }
+    ans = min(ans,pre+suf);
 
+    cout<<four+ans<<el;
 
+     
+
+    
 }
 
 int main(){

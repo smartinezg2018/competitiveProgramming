@@ -13,7 +13,6 @@
 #define ri(n) scanf("%d",&n)
 #define sz(v) int(v.size())
 #define all(v) v.begin(),v.end()
-#define print(x) cout<<" " << x<<el
 
 using namespace std;
 

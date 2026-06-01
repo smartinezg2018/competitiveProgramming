@@ -13,7 +13,6 @@
 #define ri(n) scanf("%d",&n)
 #define sz(v) int(v.size())
 #define all(v) v.begin(),v.end()
-#define print(x) cout<<" " << x<<el
 
 using namespace std;
 
@@ -42,8 +41,19 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-void solve(){
+bool same(vll& v){}
 
+void solve(){
+    string s; cin>>s;
+  
+  sort(s.begin(),s.end());
+  set<string> mp;
+  
+  while(next_permutation(s.begin(),s.end())) mp.insert(s);
+  vector<string> v;
+  for(string str:mp) v.pb(str);
+  forn(i,sz(v)) cout<<v[i]<<el;
+  
 }
 
 int main(){

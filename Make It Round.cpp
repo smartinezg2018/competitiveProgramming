@@ -13,7 +13,6 @@
 #define ri(n) scanf("%d",&n)
 #define sz(v) int(v.size())
 #define all(v) v.begin(),v.end()
-#define print(x) cout<<" " << x<<el
 
 using namespace std;
 
@@ -43,6 +42,32 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
+    ll n,k;
+    cin>>n>>k;
+    vll v(n);
+    forn(i,n) cin>>v[i];
+    if(k>2){
+        cout<<0<<el;
+        return;
+    }
+    sort(all(v));
+    sort(all(v));
+    forn(i,sz(v)) cout<<v[i]<<el;;
+    if(k == 1){
+        cout<<v[0]<<el;
+        return;
+    }
+    
+    forn(i,n-1) v.pb(abs(v[i]-v[i+1]));
+    ll temp = sz(v);
+    forn(i,temp-1) v.pb(abs(v[i]-v[i+1]));
+    sort(all(v));
+    // cout<<v[0]<<el;
+
+
+    
+
+
 
 }
 
@@ -50,8 +75,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

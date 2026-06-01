@@ -13,7 +13,6 @@
 #define ri(n) scanf("%d",&n)
 #define sz(v) int(v.size())
 #define all(v) v.begin(),v.end()
-#define print(x) cout<<" " << x<<el
 
 using namespace std;
 
@@ -42,7 +41,33 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+string convert_to_bin(ll &n){
+    string s = "";
+    while(n>0){
+        if(n%2==0) s.pb('0');
+        else s.pb('1');
+        n/=2;
+    }
+    reverse(all(s));
+    return s;
+
+}
+
 void solve(){
+    // ll n; cin>>n;
+    ll n; cin>>n;
+    vll v(n);
+    ll a =2,b =3;
+    v[0] = 1;
+    v[1] = 2;
+
+    forn(i,n-2){
+        v[i+2] = a*b;
+        a+=1;
+        b+=1;
+    }
+    forn(i,n) cout<<v[i]<<" ";
+    cout<<el;   
 
 }
 
@@ -50,8 +75,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

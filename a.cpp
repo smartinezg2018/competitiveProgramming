@@ -38,20 +38,31 @@ const ll mod = 1e9+7;
 int dr[] = {1,-1,0, 0,1,-1,-1, 1};
 int dc[] = {0, 0,1,-1,1, 1,-1,-1};
 
-ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
+ostream& operator<<(ostream& os, const ii& pa) {
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+ll gauss(ll n){
+	return n*(n+1)/2;
+}
 void solve(){
+    ll n; cin>>n;
+    vll v(n);
+    set<ll> s;
+    forn(i,n) {cin>>v[i]; s.insert(v[i]);}
+    vll l(s.begin(),s.end());
+    map<ll,ll> m;
 
+
+    
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

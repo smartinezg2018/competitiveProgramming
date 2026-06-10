@@ -45,58 +45,42 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 ll gauss(ll n){
 	return n*(n+1)/2;
 }
-
-
-
-// ll func(ll n, ll steps){
-//     if(n <=  0){
-//         return steps;
-//     }
-//     ll b = n;
-//     vll dig;
-//     while(b>0){
-//         if(b%10 != 0)dig.pb(b%10);
-//         b/=10;
-//     }
-//     ll mn = inf;
-//     for(ll num:dig){
-//         mn = min(func(n-num,steps+1),mn);
-//     }
-//     return mn;
-// }
-
-// void solve(){
-//     ll n; cin>>n;
-//     cout<<func(n,0);
-
-// }
-
-
 void solve(){
-    ll n; cin>>n;
-    vll dp(n+1,inf);
-    dp[0] = 0;
-
-    for(int i = 0;i<=n;i++){
-        int temp = i;
-        while(temp>0){
-            if(temp%10!=0){
-                dp[i] = min(dp[i],dp[i-(temp%10)]+1); 
-            }
-            temp/=10;
-        }
-
+    ll n;
+    cin>>n;
+    if(n%2==0){
+        cout<<n/2<<' '<<n/2<<el;
+        return;
     }
-    cout<<dp[n]<<el;
+    ll m = n;
+    vll v;
 
+    for(int i = 3; i*i <= n; i +=2){
+        if(n==1) break;
+        while(n%i==0){
+            n/=i;
+            v.pb(i);
+        }
+    }
+    if(n>1) v.pb(n);
+
+    ll a = 1;
+    for(int i = 1;i <sz(v);i++){
+        a*=v[i];
+    }
+
+
+    cout<<a<<' '<<m-a<<el;
+
+    
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
-    cout << setprecision(6)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    cout << setprecision(20)<< fixed;
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

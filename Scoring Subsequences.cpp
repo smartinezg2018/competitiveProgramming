@@ -42,46 +42,25 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-
-vll dp((2*1e5)+2,-1);
-
-ll rec(vector<vll>& v, int fat){
-    if(v[fat].empty()){
-        return 0;
-    }
-    ll acum = v[fat].size();
-    for(ll son: v[fat]){
-        // cout<<son<<el;
-        if(dp[son]== -1){
-            dp[son] = rec(v,son);
-            acum += dp[son];
-        }
-        
-        else 
-            acum += dp[son];
-    }
-    dp[fat] = acum;
-    return dp[fat];
-}
-
 void solve(){
-    ll n;
-    cin>>n;
-    vector<vll> v(n+2);
-    ll temp; 
-    forn(i,n-1){
-        cin>>temp;
-        v[temp].pb(i+2);
-    }
-    rec(v,1);
+    ll n; cin>>n;
+    vll v(n);
+    forn(i,n) cin>>v[i];
 
-    for(int i = 1;i<=n;i++){
-        cout<<dp[i]<<" ";
+    forn(i,n){
+        ll l = 0, r = i;
+        while(l<r){
+            ll mid = (l+r)/2;
+            if(v[mid] >= i-mid+1){
+                r = mid;
+            }
+            else{
+                l = mid+1;
+            }
+        }
+        cout<<i-r+1<<' ';
     }
     cout<<el;
-
-
-    
 
 }
 
@@ -89,8 +68,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
+    ll t; cin>>t;
+    while(t--)
     solve();
     return 0;
 }

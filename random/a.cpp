@@ -13,6 +13,7 @@
 #define ri(n) scanf("%d",&n)
 #define sz(v) int(v.size())
 #define all(v) v.begin(),v.end()
+#define print(x) cout<<" " << x<<el
 
 using namespace std;
 
@@ -40,61 +41,50 @@ int dc[] = {0, 0,1,-1,1, 1,-1,-1};
 ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
-vector<int> sieve(int n) {
+
+ll func(vector<vector<ll>> &v){
+    ll ans;
+    ll b1 = 0,b2 = 0,b3  = 0;
     
-    // creation of boolean array
-    vector<bool> prime(n + 1, true);
-    for (int p = 2; p * p <= n; p++) {
-        if (prime[p] == true) {
-            
-            // marking as false
-            for (int i = p * p; i <= n; i += p)
-                prime[i] = false;
-        }
-    }
-    
-    vector<int> res;
-    for (int p = 2; p <= n; p++){
-        if (prime[p]){ 
-            res.push_back(p);
-        }
-    }
-    return res;
+    vector<ll> mn(3);
+    mn[0] = v[0][0];
+    mn[1] = v[1][0]; 
+    mn[2] = v[2][0]; 
+
+    sort(all(mn));
+
+    for(ll i: v[0]) b1 += i;
+    for(ll i: v[1]) b2 += i;
+    for(ll i: v[2]) b3 += i;
+
+    ans = max(b1 + b2 + b3 - 2*mn[0] - 2*mn[1], b1 + b2 + b3 - 2*min({b1, b3, b2}));
+    return ans;
+
 }
 
 void solve(){
-    ll n; cin>>n;
-    vll v(n);
-    ll mul = 1;
-    ll mx = 0;
-    forn(i,n) {cin>>v[i];mul*=v[i];mx = max(mx,v[i]);}
+    ll a,b,c; cin>>a>>b>>c;
 
-    deque<ll> ans;
+    vector<vector<ll>> v(3);
+
+    v[0].assign(a,0);
+    v[1].assign(b,0);
+    v[2].assign(c,0);
 
 
-    for(int i = 0; i <n;i++){
-        for(int j = 2;j<=v[i];j++){
-            while(v[i]>1 && v[i]%j==0){
-                // if(!ans.empty() && ans.back()==j) continue;
-                ans.emplace_back(j);
-                v[i]/=j;
-            }
-            if(v[i]>1)
-                ans.emplace_back(v[i]);
-        }
-    }
-    forn(i,sz(ans)-1){
-        // cout<<ans[i]<<" ";
-        if(v[i]>v[i+1]){
-            cout<<"Alice"<<el;
-            return;
-        }
-    }
-    // cout<<"Bob"<<el;
+    forn(i,a) cin>>v[0][i];
+    forn(i,b) cin>>v[1][i];
+    forn(i,c) cin>>v[2][i];
 
-    
-    
-    
+    sort(all(v[0]));
+    sort(all(v[1]));
+    sort(all(v[2]));
+
+
+    cout<<func(v)<<el;
+
+
+
 
 }
 
@@ -102,8 +92,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    ll t; cin>>t;
-    while(t--)
-    solve();
+    // ll t; cin>>t;
+    // while(t--)
+        solve();
     return 0;
 }

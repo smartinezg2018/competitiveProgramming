@@ -1,4 +1,4 @@
-    #include <bits/stdc++.h>
+#include <bits/stdc++.h>
 
 #define fi first
 #define se second
@@ -13,6 +13,7 @@
 #define ri(n) scanf("%d",&n)
 #define sz(v) int(v.size())
 #define all(v) v.begin(),v.end()
+#define print(x) cout<<" " << x<<el
 
 using namespace std;
 
@@ -42,39 +43,6 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
-    ll n; cin>>n;
-    if(n%2==0){
-        cout<<n/2<<" "<<n/2<<el;return;
-    }
-    ll a = 1,b =1;
-    bool nombreBonito= true; 
-
-    for(int  i = 3;i<n;i+=2){
-        while(n%i==0){
-            if(nombreBonito){
-                a*=i;
-                nombreBonito = false;
-            }
-            else{
-                b*=i;
-                nombreBonito = true;
-            }
-            n/=i;
-        }
-        
-    }
-    if(n>1){
-            if(nombreBonito){
-                a*=n;
-                nombreBonito = false;
-            }
-            else{
-                b*=n;
-                nombreBonito = true;
-            }
-        }
-    
-    cout<<a<<" "<<b<<el;
 
 }
 
@@ -82,8 +50,8 @@ int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
     cout << setprecision(20)<< fixed;
-    ll t; cin>>t;
-    while(t--)
+    // ll t; cin>>t;
+    // while(t--)
     solve();
     return 0;
 }

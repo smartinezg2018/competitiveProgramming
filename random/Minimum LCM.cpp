@@ -13,6 +13,7 @@
 #define ri(n) scanf("%d",&n)
 #define sz(v) int(v.size())
 #define all(v) v.begin(),v.end()
+#define print(x) cout<<" " << x<<el
 
 using namespace std;
 
@@ -43,14 +44,20 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 
 void solve(){
     ll n; cin>>n;
-    vll v(n);
-    forn(i,n) cin>>v[i];
-
-    ll total = (v[0]+v[sz(v)-1])/(n-1);
-    
-    forn(i,n-1){
-        cout<<(total-(v[0]-v[1]))/2<<el;
+    vector<ll> mult;
+    for(int i = 2;i*i<=n;i++){
+        if(n%i==0) {mult.pb(i);mult.pb(n/i);}
     }
+    if(mult.empty()){
+        cout<<1<<" "<<n-1<<el;
+        return;
+    }
+    ll mn = inf;
+    for(int i = 0; i <sz(mult);i++){
+        mn = min(mn,max(mult[i],n-mult[i]));
+    }
+    cout<<mn<<" "<<n-mn<<el;
+
 
 }
 

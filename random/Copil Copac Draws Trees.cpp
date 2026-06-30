@@ -13,6 +13,7 @@
 #define ri(n) scanf("%d",&n)
 #define sz(v) int(v.size())
 #define all(v) v.begin(),v.end()
+#define print(x) cout<<" " << x<<el
 
 using namespace std;
 
@@ -41,30 +42,47 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
-void solve(){
-    ll n; cin>>n;
-    vi v(n);
-    forn(i,n) cin>>v[i];
-    map<int, set<int>> m = {
-        {1, {2,3,4,5}},
-        {6, {2,3,4,5}},
-        {3, {1,2,5,6}},
-        {4, {1,2,5,6}},
-        {2, {1,3,4,6}},
-        {5, {1,3,4,6}}
-    };
-    int count = 0;
+map<pair<int, int>, int> ind;
+vector<vector<int>> adj;
+vector<int> dp;
 
-    forn(i,n-1){
-        if(m[v[i]].find(v[i+1])!=m[v[i]].end()) continue;
-        count++;
-        i+=1;
+void rec(int parpar, int par){
+    for(int son : adj[par]){
+        if(son == parpar) continue;
+        if(ind[{par,son}]<ind[{par,parpar}]) dp[son] = dp[par]+1;
+        else dp[son] = dp[par];
+        // cout<<son<<el;
+        rec(par,son);
     }
-    cout<<count<<el;
 
+}
+
+void solve() {
+    ll n; cin>>n;
+    dp.assign(n+1,0);
+    adj.assign(n+1,vector<int>());
+    ind.clear();
+
+    for(int i = 0; i < n-1;i++){
+        int a,b;
+        cin>>a>>b;
+
+        adj[a].pb(b);
+        adj[b].pb(a);
+
+        ind[{a,b}] = i;
+        ind[{b,a}] = i;
+    }
+
+    ind[{1,0}] = n;
+    ind[{0,1}] = n;
+
+    rec(0,1);
+    cout<<*max_element(all(dp))<<el;
 
 
 }
+
 
 int main(){
     ios_base::sync_with_stdio(false);

@@ -2,98 +2,142 @@
 
 #define fi first
 #define se second
-#define forn(i,n) for(int i=0; i< (int)n; ++i)
-#define for1(i,n) for(int i=1; i<= (int)n; ++i)
-#define fore(i,l,r) for(int i=(int)l; i<= (int)r; ++i)
-#define ford(i,n) for(int i=(int)(n) - 1; i>= 0; --i)
-#define fored(i,l,r) for(int i=(int)r; i>= (int)l; --i)
+#define forn(i, n) for (int i = 0; i < (int)n; ++i)
+#define for1(i, n) for (int i = 1; i <= (int)n; ++i)
+#define fore(i, l, r) for (int i = (int)l; i <= (int)r; ++i)
+#define ford(i, n) for (int i = (int)(n) - 1; i >= 0; --i)
+#define fored(i, l, r) for (int i = (int)r; i >= (int)l; --i)
 #define pb push_back
 #define el '\n'
-#define d(x) cout<< #x<< " " << x<<el
-#define ri(n) scanf("%d",&n)
+#define d(x) cout << #x << " " << x << el
+#define ri(n) scanf("%d", &n)
 #define sz(v) int(v.size())
-#define all(v) v.begin(),v.end()
-#define print(x) cout<<" " << x<<el
+#define all(v) v.begin(), v.end()
+#define print(x) cout << " " << x << el
 
 using namespace std;
 
 typedef long long ll;
 typedef double ld;
-typedef pair<int,int> ii;
-typedef pair<ll,ll> pll;
+typedef pair<int, int> ii;
+typedef pair<ll, ll> pll;
 typedef tuple<int, int, int> iii;
 typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
 typedef vector<ld> vd;
-typedef array<ll,2> v2;
-
+typedef array<ll, 2> v2;
 
 const int inf = 1e9;
-const int nax = 1e5+200;
+const int nax = 1e5 + 200;
 const ld pi = acos(-1);
-const ld eps= 1e-9;
-const ll mod = 1e9+7;
+const ld eps = 1e-9;
+const ll mod = 1e9 + 7;
 
-int dr[] = {1,-1,0, 0,1,-1,-1, 1};
-int dc[] = {0, 0,1,-1,1, 1,-1,-1};
+int dr[] = {1, -1, 0, 0, 1, -1, -1, 1};
+int dc[] = {0, 0, 1, -1, 1, 1, -1, -1};
 
-ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
-return os << "("<< pa.fi << ", " << pa.se << ")";
+ostream &operator<<(ostream &os, const ii &pa)
+{ // DEBUGGING
+    return os << "(" << pa.fi << ", " << pa.se << ")";
 }
 
-ll func(vector<vector<ll>> &v){
-    ll ans;
-    ll b1 = 0,b2 = 0,b3  = 0;
-    
-    vector<ll> mn(3);
-    mn[0] = v[0][0];
-    mn[1] = v[1][0]; 
-    mn[2] = v[2][0]; 
+map<int, vi> mp;
+vector<int> father;
+vector<bool> visited;
+vector<int> ans;
+ll n, m;
 
-    sort(all(mn));
-
-    for(ll i: v[0]) b1 += i;
-    for(ll i: v[1]) b2 += i;
-    for(ll i: v[2]) b3 += i;
-
-    ans = max(b1 + b2 + b3 - 2*mn[0] - 2*mn[1], b1 + b2 + b3 - 2*min({b1, b3, b2}));
-    return ans;
-
+bool in(int f, int s)
+{
+    return find(all(mp[f]), s) != mp[f].end();
 }
 
-void solve(){
-    ll a,b,c; cin>>a>>b>>c;
+void dfs(int f)
+{
+    visited[f] = true;
+    if (!ans.empty())
+        return;
+    for (int s : mp[f])
+    {
+        if (visited[s] && father[f] != s && father[f] != 0 && ans.empty())
+        {
+            ans.pb(s);
+            ans.pb(f);
 
-    vector<vector<ll>> v(3);
+            // cout << s << " ";
+            // cout << f << " ";
 
-    v[0].assign(a,0);
-    v[1].assign(b,0);
-    v[2].assign(c,0);
+            int cur = father[f];
+            while (!in(cur, s))
+            {
+                if (in(cur, s))
+                    break;
+                // cout << cur << " ";
+                ans.pb(cur);
+                cur = father[cur];
+            }
+            ans.pb(cur);
+            // cout << cur << " ";
+            ans.pb(s);
+            // cout << s << el;
+            return;
+        }
 
+        if (visited[s])
+            continue;
 
-    forn(i,a) cin>>v[0][i];
-    forn(i,b) cin>>v[1][i];
-    forn(i,c) cin>>v[2][i];
-
-    sort(all(v[0]));
-    sort(all(v[1]));
-    sort(all(v[2]));
-
-
-    cout<<func(v)<<el;
-
-
-
-
+        father[s] = f;
+        dfs(s);
+    }
 }
 
-int main(){
+void solve()
+{
+    cin >> n >> m;
+    visited.assign(n + 1, false);
+    father.assign(n + 1, 0);
+
+    int a, b;
+    forn(i, m)
+    {
+        cin >> a >> b;
+        mp[a].pb(b);
+        mp[b].pb(a);
+    }
+
+    for (auto [h, v] : mp)
+    {
+        if (!ans.empty())
+            break;
+        if (visited[h])
+            continue;
+        dfs(h);
+    }
+
+    if (ans.empty())
+    {
+        cout << "IMPOSSIBLE" << el;
+        return;
+    }
+    cout << ans.size() << el;
+    forn(i, ans.size())
+    {
+        cout << ans[i] << " ";
+    }
+
+    // cout << visited.size();
+}
+
+int main()
+{
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
-    cout << setprecision(20)<< fixed;
-    // ll t; cin>>t;
-    // while(t--)
-        solve();
+    cin.tie(NULL);
+    cout.tie(NULL);
+    cout << setprecision(20) << fixed;
+    // ll t;
+    // cin >> t;
+    // while (t--)
+    solve();
     return 0;
 }

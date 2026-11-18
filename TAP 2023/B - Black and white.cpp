@@ -44,24 +44,6 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 
 void solve(){
 
-    ll n; cin>>n;
-    string s;
-    cin>>s;
-    
-    deque<ll> dq;
-
-    bool rev = false;
-    dq.pb(1);
-    if(s[0] == 'o') rev^=true;
-
-    for1(i,n-1){
-        if(!rev)dq.push_back(i+1);
-        else dq.push_front(i+1);
-        if(s[i] == 'o') rev^=true;
-    }
-    if(rev) reverse(all(dq));
-    forn(i,n) cout<<dq[i]<<' ';
-
 }
 
 int main(){

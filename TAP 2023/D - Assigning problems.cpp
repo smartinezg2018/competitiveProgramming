@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 
 #define fi first
 #define se second
@@ -21,7 +21,7 @@ typedef long long ll;
 typedef double ld;
 typedef pair<int,int> ii;
 typedef pair<ll,ll> pll;
-typedef tuple<int, int, int> iii;
+// typedef tuple<int, int, int> iii;
 typedef vector<int> vi;
 typedef vector<ii> vii;
 typedef vector<ll> vll;
@@ -43,6 +43,24 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
+    ll n; cin>>n;
+    vll v(n),b(n);
+    forn(i,n) cin>>v[i];
+    forn(i,n) cin>>b[i];
+    ll mn = inf;
+    ll acum = 0, sum = 0;
+    partial_sum(all(v),v.begin());
+    partial_sum(all(b),b.begin());
+
+ 
+    forn(i,n){
+        // d(v[i]);
+        // d(b[i]);
+        // d(v[i]/b[i]);
+        mn = min(b[i]/v[i],mn);
+    }
+    cout<<mn<<el;
+
 
 }
 

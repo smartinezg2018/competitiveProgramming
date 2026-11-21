@@ -42,7 +42,36 @@ ostream& operator<<(ostream& os, const ii& pa) { // DEBUGGING
 return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
+
+
+
+
 void solve(){
+    ll n,m; cin>>n>>m;
+    vll v(n),u(m);
+    forn(i,n) cin>>v[i];
+    forn(i,m) cin>>u[i];
+
+    vector<ll> su;
+    forn(i,m){
+        if(su.empty() || su.back()>u[i]) su.pb(u[i]);
+    } 
+    reverse(all(su));
+
+    forn(i,n){
+        ll a = v[i]%su.back();
+        
+        auto it = upper_bound(all(su),a); 
+
+        while(a > 0 && it != su.begin()){ 
+            it--;
+            a = a % *it;
+            it = upper_bound(all(su),a); 
+        }
+
+        cout<<a<<" ";
+    }
+
 
 }
 

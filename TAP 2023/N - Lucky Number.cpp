@@ -43,6 +43,33 @@ return os << "("<< pa.fi << ", " << pa.se << ")";
 }
 
 void solve(){
+    ll n; cin>>n;
+    vector<ll> v(n);
+    forn(i,n) cin>>v[i];
+    vi mods(5);
+    forn(i,n) mods[v[i]%5]++;
+    
+    ll mn;
+    ll count = 0;
+
+    count+=mods[0];
+    mods[0] = 0;
+
+    mn = min(mods[4],mods[1]);
+    count+= mn;
+    mods[4] -= mn;
+    mods[1] -= mn;
+
+    mn = min(mods[2],mods[3]);
+    count+= mn;
+    mods[2] -= mn;
+    mods[3] -= mn;
+
+    
+
+
+
+    
 
 }
 
